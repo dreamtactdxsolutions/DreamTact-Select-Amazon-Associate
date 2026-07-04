@@ -6,6 +6,7 @@ interface HeaderProps {
   onOpenConfig: () => void;
   activeSection: string;
   setActiveSection: (section: string) => void;
+  isAdmin: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -13,6 +14,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenConfig,
   activeSection,
   setActiveSection,
+  isAdmin,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -60,33 +62,39 @@ export const Header: React.FC<HeaderProps> = ({
           >
             スペック比較
           </button>
-          <button
-            className={`nav-link ${activeSection === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveSection('dashboard')}
-          >
-            <Flame size={16} className="icon-trend" />
-            リサーチ分析
-          </button>
-          <button
-            className={`nav-link ${activeSection === 'blog' ? 'active' : ''}`}
-            onClick={() => setActiveSection('blog')}
-          >
-            <Sparkles size={14} className="icon-sparkle-menu" />
-            AIブログ作成
-          </button>
+          {isAdmin && (
+            <>
+              <button
+                className={`nav-link ${activeSection === 'dashboard' ? 'active' : ''}`}
+                onClick={() => setActiveSection('dashboard')}
+              >
+                <Flame size={16} className="icon-trend" />
+                リサーチ分析
+              </button>
+              <button
+                className={`nav-link ${activeSection === 'blog' ? 'active' : ''}`}
+                onClick={() => setActiveSection('blog')}
+              >
+                <Sparkles size={14} className="icon-sparkle-menu" />
+                AIブログ作成
+              </button>
+            </>
+          )}
         </nav>
 
         <div className="header-actions">
-          <div className="id-badge-container" onClick={onOpenConfig} title="ストアIDを設定">
-            <span className="id-label">ストアID:</span>
-            <div className="id-badge">
-              <ShieldCheck size={14} className="icon-success" />
-              <span className="id-value">{currentId}</span>
+          {isAdmin && (
+            <div className="id-badge-container" onClick={onOpenConfig} title="ストアIDを設定">
+              <span className="id-label">ストアID:</span>
+              <div className="id-badge">
+                <ShieldCheck size={14} className="icon-success" />
+                <span className="id-value">{currentId}</span>
+              </div>
+              <button className="settings-btn" aria-label="設定を開く">
+                <Settings size={16} />
+              </button>
             </div>
-            <button className="settings-btn" aria-label="設定を開く">
-              <Settings size={16} />
-            </button>
-          </div>
+          )}
         </div>
       </div>
 

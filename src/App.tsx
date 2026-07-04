@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { products, getPriceRanges, getAffiliateLink } from './data/products';
 import type { Product } from './data/products';
 import { Header } from './components/Header';
@@ -11,6 +11,19 @@ import { ArticleGenerator } from './components/ArticleGenerator';
 import { Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 
 function App() {
+  // 管理者モードの判定 (localhost であるか、URLに ?admin=true があるか、localStorage に記録がある場合)
+  const [isAdmin] = useState<boolean>(() => {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return true;
+    }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === 'true') {
+      localStorage.setItem('dreamtact_admin_mode', 'true');
+      return true;
+    }
+    return localStorage.getItem('dreamtact_admin_mode') === 'true';
+  });
+
   // アソシエイトIDの状態管理 (初期値: ローカルストレージ、なければ dreamtactaffi-22)
   const [associateId, setAssociateId] = useState<string>(() => {
     const saved = localStorage.getItem('dreamtact_associate_id');
@@ -18,6 +31,22 @@ function App() {
   });
 
   const [activeSection, setActiveSection] = useState<string>('home');
+
+  // URLのパラメータから ?admin=true を削除してクリーンにする
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === 'true') {
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, '', newUrl);
+    }
+  }, []);
+
+  // 一般ユーザーが管理者用画面に直リンクされた場合の保護
+  useEffect(() => {
+    if (!isAdmin && (activeSection === 'blog' || activeSection === 'dashboard')) {
+      setActiveSection('home');
+    }
+  }, [activeSection, isAdmin]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPrice, setSelectedPrice] = useState<string>('all');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -66,6 +95,7 @@ function App() {
           setActiveSection(sec);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        isAdmin={isAdmin}
       />
 
       <main className="main-content" style={{ marginTop: '90px', flexGrow: 1 }}>
@@ -313,14 +343,14 @@ function App() {
         )}
 
         {/* ==================== 4. トレンド分析画面 ==================== */}
-        {activeSection === 'dashboard' && (
+        {activeSection === 'dashboard' && isAdmin && (
           <div className="container">
             <TrendDashboard />
           </div>
         )}
 
         {/* ==================== 5. AI記事生成画面 ==================== */}
-        {activeSection === 'blog' && (
+        {activeSection === 'blog' && isAdmin && (
           <div className="container">
             <ArticleGenerator associateId={associateId} />
           </div>
