@@ -5,6 +5,7 @@
 - 対象アカウント: 未設定（例：X @xxxx、Instagram @xxxx、Threads @xxxx）
 
 **未設定のあいだは、Metricoolへの予約・投稿・分析の取得を一切行わない。**
+このリポジトリでは `.claude/settings.json` でMetricoolのツールをすべて禁止している。アフィリエイト用ブランドを用意したら、その禁止を外す。
 既存のMetricoolブランドは別案件のブログ用なので、触らない。
 
 ## Amazonアソシエイト
