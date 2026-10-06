@@ -9,6 +9,7 @@ import { CompareTable } from './components/CompareTable';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { ArticleGenerator } from './components/ArticleGenerator';
 import { Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
+import { initAnalytics, trackSectionView } from './analytics';
 
 function App() {
   // 管理者モードの判定 (localhost であるか、URLに ?admin=true があるか、localStorage に記録がある場合)
@@ -40,6 +41,15 @@ function App() {
       window.history.replaceState({}, '', newUrl);
     }
   }, []);
+
+  // アクセス解析（オーナー自身のアクセスは数字を汚すので計測しない）
+  useEffect(() => {
+    if (!isAdmin) initAnalytics();
+  }, [isAdmin]);
+
+  useEffect(() => {
+    if (activeSection !== 'home') trackSectionView(activeSection);
+  }, [activeSection]);
 
   // 一般ユーザーが管理者用画面に直リンクされた場合の保護
   useEffect(() => {

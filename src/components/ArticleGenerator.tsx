@@ -3,6 +3,36 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Sparkles, Key, AlertCircle, Copy, Check, FileText, Code, RefreshCw } from 'lucide-react';
 import { getAffiliateLink } from '../data/products';
 
+const PR_DISCLOSURE = '本ページはプロモーション（広告）を含みます。';
+
+const formatCheckedDate = () => {
+  const d = new Date();
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+};
+
+// 簡易Markdown to HTML変換 (簡易パーサー)
+const markdownToHtml = (markdown: string) => {
+  let htmlConverted = markdown
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
+    .replace(/^\* (.*$)/gim, '<li>$1</li>')
+    .replace(/^- (.*$)/gim, '<li>$1</li>')
+    .replace(/^---$/gim, '<hr>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer sponsored">$1</a>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>');
+
+  // 全体を段落で囲み、リストをulで囲む処理
+  htmlConverted = `<p>${htmlConverted}</p>`;
+  // ブロック要素の直後の改行タグは余白が二重になるので取り除く
+  htmlConverted = htmlConverted.replace(/(<\/li>|<\/h[1-3]>|<\/blockquote>|<hr>)<br>/g, '$1');
+  htmlConverted = htmlConverted.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
+  return htmlConverted;
+};
+
 interface ArticleGeneratorProps {
   associateId: string;
 }
@@ -27,6 +57,7 @@ export const ArticleGenerator: React.FC<ArticleGeneratorProps> = ({ associateId 
   };
 
   // デモ用の模擬ブログ生成テキスト
+  // 実際に使っていない商品を前提にした「スペック比較・口コミ傾向」形式。数値や口コミは要確認のまま残す
   const generateDemoArticle = (input: string) => {
     const productName = input.includes('http') 
       ? 'Amazon特選 プレミアム・スマートガジェット' 
@@ -34,139 +65,71 @@ export const ArticleGenerator: React.FC<ArticleGeneratorProps> = ({ associateId 
       
     const mockAsin = 'B0CHWX1783';
     const affUrl = getAffiliateLink(mockAsin, associateId);
+    const checkedDate = formatCheckedDate();
 
-    const markdown = `# 【実機レビュー】QOLが劇的に向上する「${productName}」を使って分かった本音のメリット・デメリット
+    const body = `# 「${productName}」はどんな人に向いている？スペック比較と口コミ傾向から分かるメリット・デメリット
 
-日常生活をより快適に、そしてスマートにアップデートしたいと考えたことはありませんか？
-今回は、Amazonで今売れに売れている大注目アイテム**「${productName}」**を徹底レビューします！
+> ${PR_DISCLOSURE}
 
-「本当に買う価値はあるの？」「安いだけの偽物じゃない？」といった疑問に、実際に使ってみた感想を交えながらメリット・デメリットを忖度なしで紹介します。
+「${productName}」の購入を迷っている方に向けて、公式のスペックとAmazonに寄せられた口コミの傾向から、向いている人・向いていない人を整理しました。
+※本記事は実機を使ったレビューではなく、公開情報をもとにした比較・分析です。
 
 ---
 
 ## 🧐 「${productName}」の基本スペック
-まずはこの商品の基本仕様をチェックしておきましょう。
+価格や評価は変動します。最新の情報は商品ページでご確認ください。
 
-- **価格**: ￥24,800（参考価格）
-- **特徴**: 最先端のインテリジェント制御機能、超軽量・スリム設計
-- **総合評価**: ★★★★☆ (4.7 / 5.0)
-
----
-
-## 💖 実際に使って分かった3つのメリット
-
-### 1️⃣ 圧倒的な使いやすさと時短効果
-設定から日常での使用まで、とにかく操作がシンプルで直感的に使えます。これまでの作業時間がほぼ半分になり、暮らしにゆとりが生まれました。
-
-### 2️⃣ 所有欲を満たすプレミアムな高級感
-チタン合金のような美しい外装と、すっきりしたミニマルなデザインは、置いているだけでインテリアとしても機能します。
-
-### 3️⃣ 同価格帯を圧倒する高コスパ
-「このクオリティなら倍の値段がしてもおかしくない」と思えるほど、機能が充実しています。Amazonで売れている理由がよく分かります。
+- **価格**: 要確認（${checkedDate}時点の価格を記入）
+- **主な特徴**: 要確認（メーカー公式サイトの仕様を記入）
+- **Amazonの評価**: 要確認（${checkedDate}時点の星の数とレビュー件数を記入）
 
 ---
 
-## ⚠️ 購入前に知っておくべき2つのデメリット
+## 💡 スペックから分かる3つのメリット
 
-### 🔴 バッテリー充電の頻度
-多機能なため、フル稼働させるとバッテリーの消費がやや早く感じます。こまめな給電、またはスマートな運用設定が必要です。
+### 1️⃣ （例）操作がシンプル
+要確認：公式の仕様や説明書から、どこが分かりやすいのかを具体的に書く。
 
-### 🔴 初期設定時のアプリ同期
-スマホアプリとの連携が必要ですが、最初の同期で数回エラーが出ることがありました。一度繋がってしまえば、その後は極めて安定しています。
+### 2️⃣ （例）デザイン・サイズ
+要確認：サイズや重さの数値を添えて書く。
 
----
-
-## 🗣️ 購入者のリアルな口コミ・評判
-
-> **「生活がガラリと変わりました！」** （30代・男性）
-> 半信半疑で購入しましたが、今では毎日の生活に欠かせない相棒です。もっと早く買えばよかった。
-
-> **「デザインと質感が素晴らしい」** （20代・女性）
-> メタル部分の高級感が特に気に入っています。プレゼントとしても喜ばれそうなクオリティです。
+### 3️⃣ （例）同価格帯との比較
+要確認：比較する商品名と、違いが出る項目を書く。
 
 ---
 
-## 🎯 まとめ：どんな人におすすめ？
+## ⚠️ 購入前に確認したい2つの注意点
 
-- 毎日を少しでも便利に、スマートに変えたい人
-- コストパフォーマンスに優れた実用的なガジェットを探している人
-- 大切な人へのセンスの良いギフトを探している人
+### 🔴 （例）バッテリー持ち
+要確認：公式のバッテリー持続時間と、口コミで多い不満の傾向を書く。
 
-「${productName}」は、間違いなくあなたの生活の質（QOL）を引き上げてくれる投資価値のあるプロダクトです。
+### 🔴 （例）初期設定
+要確認：アプリ連携の有無や対応機種を書く。
 
-Amazonアソシエイトにも対応しており、現在割引セールが行われていることも多いため、気になる方はぜひお早めにチェックしてみてください！
+---
 
-<div class="cta-box" style="text-align: center; margin: 30px 0; padding: 20px; border: 1px solid #d4af37; border-radius: 12px; background: rgba(212,175,55,0.05);">
-  <p style="margin-bottom: 12px; font-weight: bold;">お得なAmazonセール会場はこちら</p>
-  <a href="${affUrl}" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%); color: #000; font-weight: 700; padding: 12px 24px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(255,153,0,0.3);">
-    🛒 Amazonで「${productName}」の最新価格を見る
+## 🗣️ 口コミの傾向
+要確認：Amazonのレビューを読み、良い評価と悪い評価で多い意見をそれぞれ要約する。口コミを作ったり、そのまま転載したりしない。
+
+---
+
+## 🎯 まとめ：向いている人・向いていない人
+
+**向いている人**
+- 要確認
+
+**向いていない人**
+- 要確認
+
+価格やセールの有無は時期によって変わります。最新の情報はAmazonの商品ページでご確認ください。`;
+
+    const cta = `<div class="cta-box" style="text-align: center; margin: 30px 0; padding: 20px; border: 1px solid #d4af37; border-radius: 12px; background: rgba(212,175,55,0.05);">
+  <a href="${affUrl}" target="_blank" rel="noopener noreferrer sponsored" style="background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%); color: #000; font-weight: 700; padding: 12px 24px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(255,153,0,0.3);">
+    🛒 Amazonで「${productName}」の詳細を見る
   </a>
 </div>`;
 
-    const html = `<h1>【実機レビュー】QOLが劇的に向上する「${productName}」を使って分かった本音のメリット・デメリット</h1>
-<p>日常生活をより快適に、そしてスマートにアップデートしたいと考えたことはありませんか？<br>
-今回は、Amazonで今売れに売れている大注目アイテム<strong>「${productName}」</strong>を徹底レビューします！</p>
-<p>「本当に買う価値はあるの？」「安いだけの偽物じゃない？」といった疑問に、実際に使ってみた感想を交えながらメリット・デメリットを忖度なしで紹介します。</p>
-
-<hr>
-
-<h2>🧐 「${productName}」の基本スペック</h2>
-<p>まずはこの商品の基本仕様をチェックしておきましょう。</p>
-<ul>
-  <li><strong>価格</strong>: ￥24,800（参考価格）</li>
-  <li><strong>特徴</strong>: 最先端のインテリジェント制御機能、超軽量・スリム設計</li>
-  <li><strong>総合評価</strong>: ★★★★☆ (4.7 / 5.0)</li>
-</ul>
-
-<hr>
-
-<h2>💖 実際に使って分かった3つのメリット</h2>
-<h3>1️⃣ 圧倒的な使いやすさと時短効果</h3>
-<p>設定から日常での使用まで、とにかく操作がシンプルで直感的に使えます。これまでの作業時間がほぼ半分になり、暮らしにゆとりが生まれました。</p>
-<h3>2️⃣ 所有欲を満たすプレミアムな高級感</h3>
-<p>チタン合金のような美しい外装と、すっきりしたミニマルなデザインは、置いているだけでインテリアとしても機能します。</p>
-<h3>3️⃣ 同価格帯を圧倒する高コスパ</h3>
-<p>「このクオリティなら倍の値段がしてもおかしくない」と思えるほど、機能が充実しています。Amazonで売れている理由がよく分かります。</p>
-
-<hr>
-
-<h2>⚠️ 購入前に知っておくべき2つのデメリット</h2>
-<h3>🔴 バッテリー充電の頻度</h3>
-<p>多機能なため、フル稼働させるとバッテリーの消費がやや早く感じます。こまめな給電、またはスマートな運用設定が必要です。</p>
-<h3>🔴 初期設定時のアプリ同期</h3>
-<p>スマホアプリとの連携が必要ですが、最初の同期で数回エラーが出ることがありました。一度繋がってしまえば、その後は極めて安定しています。</p>
-
-<hr>
-
-<h2>🗣️ 購入者のリアルな口コミ・評判</h2>
-<blockquote>
-  <p><strong>「生活がガラリと変わりました！」</strong> （30代・男性）<br>
-  半信半疑で購入しましたが、今では毎日の生活に欠かせない相棒です。もっと早く買えばよかった。</p>
-</blockquote>
-<blockquote>
-  <p><strong>「デザインと質感が素晴らしい」</strong> （20代・女性）<br>
-  メタル部分の高級感が特に気に入っています。プレゼントとしても喜ばれそうなクオリティです。</p>
-</blockquote>
-
-<hr>
-
-<h2>🎯 まとめ：どんな人におすすめ？</h2>
-<ul>
-  <li>毎日を少しでも便利に、スマートに変えたい人</li>
-  <li>コストパフォーマンスに優れた実用的なガジェットを探している人</li>
-  <li>大切な人へのセンスの良いギフトを探している人</li>
-</ul>
-<p>「${productName}」は、間違いなくあなたの生活の質（QOL）を引き上げてくれる投資価値のあるプロダクトです。</p>
-<p>Amazonアソシエイトにも対応しており、現在割引セールが行われていることも多いため、気になる方はぜひお早めにチェックしてみてください！</p>
-
-<div class="cta-box" style="text-align: center; margin: 30px 0; padding: 20px; border: 1px solid #d4af37; border-radius: 12px; background: rgba(212,175,55,0.05);">
-  <p style="margin-bottom: 12px; font-weight: bold;">お得なAmazonセール会場はこちら</p>
-  <a href="${affUrl}" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%); color: #000; font-weight: 700; padding: 12px 24px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(255,153,0,0.3);">
-    🛒 Amazonで「${productName}」の最新価格を見る
-  </a>
-</div>`;
-
-    return { markdown, html };
+    return { markdown: `${body}\n\n${cta}`, html: `${markdownToHtml(body)}\n\n${cta}` };
   };
 
   const handleGenerate = async (e: React.FormEvent) => {
@@ -180,9 +143,9 @@ Amazonアソシエイトにも対応しており、現在割引セールが行�
 
     const styleGuide = {
       blog: '親しみやすく熱心なブロガー風の文体で、初心者に寄り添っておすすめする記事',
-      honest: '中立で誠実な専門家風の文体で、良い点だけでなく悪い点も徹底検証する本音レビュー記事',
+      honest: '中立で誠実な専門家風の文体で、良い点だけでなく悪い点も公開情報から検証する比較記事',
       beginner: '難しい用語を使わず、メリットをわかりやすく解説する初心者向けの紹介記事',
-      promotional: 'コンバージョン率（購入率）を重視し、今すぐ購入したくなるような魅力的なコピーを多用したセールスレター風記事',
+      promotional: '購入の決め手になる情報（向いている人、他商品との違い）を前面に出した記事。煽り表現や誇大表現は使わない',
     }[writingStyle];
 
     // ASINコードを抽出（なければ仮のコード）
@@ -199,8 +162,8 @@ Amazonアソシエイトにも対応しており、現在割引セールが行�
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
-        const prompt = `あなたはトップクラスのAmazonアフィリエイターです。
-以下の入力情報に基づいて、読者が「欲しい！」と思えるような魅力的な商品紹介ブログ記事を作成してください。
+        const prompt = `あなたは誠実さを重視するAmazonアフィリエイトメディアの編集者です。
+以下の入力情報に基づいて、読者が購入を判断しやすい商品紹介記事を作成してください。
 
 【入力された商品情報】
 ${productInput}
@@ -208,45 +171,41 @@ ${productInput}
 【記事のトーン・マナー】
 ${styleGuide}
 
+【必ず守るルール】
+- タイトルの直後に「${PR_DISCLOSURE}」と1行で明記する
+- 書き手はこの商品を実際に使っていない。「実機レビュー」「使ってみた」「実際に使って分かった」など、使用したと読める表現は使わない
+- 口コミを創作しない。口コミの傾向を書く場合は「要確認：Amazonのレビューを要約」とだけ書く
+- 価格・評価・スペックの数値は、入力情報に無ければ「要確認」と書く。価格には「${formatCheckedDate()}時点」と添える
+- 「最強」「絶対」「No.1」「最安」など、根拠のない断定表現や誇大表現を使わない
+- 美容・健康系の商品では、医薬品のような効能効果をうたわない
+- 向いていない人も必ず書く
+
 【アフィリエイトリンク】
-必ず記事の最後やおすすめポイントの直後など、要所に以下のアフィリエイトリンクを設置してください。
+記事の最後とおすすめポイントの直後に、以下のリンクを設置してください。
 ・リンク先URL: ${affiliateUrl}
-・アンカーテキスト（リンクの文字）例: 「Amazonで詳細と最新価格をチェックする」
+・アンカーテキスト例: 「Amazonで詳細を見る」
 
 【構成案】
-1. 読者の目を引く魅力的なタイトル
-2. 導入文（読者の悩みへの共感、この記事でわかること）
-3. 商品の概要・基本スペック（見やすい箇条書き）
-4. 実際に使ってわかったメリット（3つ、見出しをつけて詳しく解説）
-5. 購入前に知っておくべきデメリット（2つ、誠実に解説することで信頼性を高める）
-6. ユーザーの代表的な口コミ（2件、リアルなトーンで）
-7. まとめとターゲット層（どんな人におすすめか）
-8. アフィリエイトリンク付きのCTA（購入誘導エリア）
+1. 読者の悩みに合ったタイトル（「レビュー」ではなく「比較」「選び方」「向いている人」などの表現）
+2. 広告表記（上記の1行）
+3. 導入文（読者の悩みへの共感、この記事でわかること、公開情報にもとづく分析であること）
+4. 商品の概要・基本スペック（見やすい箇条書き）
+5. スペックから分かるメリット（3つ、見出しをつけて解説）
+6. 購入前に確認したい注意点（2つ、誠実に解説）
+7. 口コミの傾向（要確認）
+8. まとめ：向いている人・向いていない人
+9. アフィリエイトリンク付きのCTA
 
 【出力フォーマット】
 Markdown形式で出力してください。見出しは「#」や「##」を適切に使い、太字やリストを活用して読みやすく整えてください。`;
 
         const result = await model.generateContent(prompt);
-        const responseText = result.response.text();
+        const rawText = result.response.text();
+        // AIが広告表記を落とした場合でも、必ず冒頭に入るようにする
+        const responseText = rawText.includes(PR_DISCLOSURE) ? rawText : `> ${PR_DISCLOSURE}\n\n${rawText}`;
         
         setGeneratedMarkdown(responseText);
-        
-        // 簡易Markdown to HTML変換 (簡易パーサー)
-        let htmlConverted = responseText
-          .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-          .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-          .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-          .replace(/^\* (.*$)/gim, '<li>$1</li>')
-          .replace(/^- (.*$)/gim, '<li>$1</li>')
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-          .replace(/\n\n/g, '</p><p>')
-          .replace(/\n/g, '<br>');
-        
-        // 全体を段落で囲み、リストをulで囲む処理
-        htmlConverted = `<p>${htmlConverted}</p>`;
-        htmlConverted = htmlConverted.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
-        setGeneratedHtml(htmlConverted);
+        setGeneratedHtml(markdownToHtml(responseText));
         setActiveTab('preview');
       } catch (error: any) {
         console.error('Gemini API Error:', error);
@@ -280,7 +239,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
     <div className="generator-container fade-in">
       <div className="generator-header text-center">
         <h1 className="gradient-gold-text">AIアフィリエイト記事ジェネレーター</h1>
-        <p className="subtitle">Amazonの商品URLや商品名から、高成約率のブログレビュー記事をAIが自動で執筆します</p>
+        <p className="subtitle">Amazonの商品URLや商品名から、スペック比較・口コミ傾向にもとづく記事の下書きをAIが作成します</p>
       </div>
 
       <div className="generator-grid">
@@ -294,7 +253,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
               <h4>Gemini API キー設定 (任意)</h4>
             </div>
             <p className="api-key-desc">
-              APIキーを入力すると、本物のAIがどんな商品でもリアルタイムに執筆します。入力がない場合は、デモモードで超リアルな執筆体験が動きます。
+              APIキーを入力すると、本物のAIがどんな商品でもリアルタイムに執筆します。入力がない場合は、デモ用の記事テンプレート（要確認の項目を埋めて使う形式）を表示します。
             </p>
             <div className="api-input-wrapper">
               <input
@@ -336,7 +295,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
               <div className="style-options">
                 {[
                   { id: 'blog', label: '親しみやすいブログ風' },
-                  { id: 'honest', label: '辛口・本音レビュー' },
+                  { id: 'honest', label: '中立・辛口比較' },
                   { id: 'beginner', label: '初心者向けやさしい解説' },
                   { id: 'promotional', label: 'セールス特化 (CVR重視)' }
                 ].map((style) => (
