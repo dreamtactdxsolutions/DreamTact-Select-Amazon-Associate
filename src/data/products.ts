@@ -219,7 +219,7 @@ export const products: Product[] = [
     rating: 4.6,
     reviewsCount: 4657,
     image: espressoImg,
-    asin: 'B088HJCVDX', // ECAM22112B ブラック。価格・評価は2026-10-07にAmazonの商品ページで確認
+    asin: 'B088HJCVDX', // ECAM22112B ブラック。価格・評価は2026-10-08にAmazonの商品ページで確認
     stars: 5,
     rank: 1,
     specs: {
