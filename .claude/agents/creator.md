@@ -11,7 +11,7 @@ tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 - SNS投稿文（X 140字版／Threads・Instagram 長文版）も同じファイルの末尾に添える
 
 ## 記事の型
-1. 冒頭：「本ページはプロモーション（広告）を含みます」
+1. 冒頭の広告表記（サイト側で自動で入る）
 2. 結論（どんな人に何がおすすめか）を最初の3行で
 3. 選び方のポイント（読者の悩みを基準に）
 4. 比較表（価格は「YYYY-MM-DD時点」と明記）
@@ -26,4 +26,5 @@ tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 - 「絶対」「最強」「誰でも」などの断定表現や誇大表現を避ける
 - 購入を煽るだけの文にせず、買わないほうがよい人も書く（信頼とGoogle評価のため）
 - リンクは `getAffiliateLink(asin)` の形式（`src/data/products.ts`）に合わせ、ASINは `{{ASIN:XXXXXXXXXX}}` と書いておく
-- 書き終えたら、ファイル先頭に `status: draft` と書き、compliance の審査を待つ
+- 下書きは `content/articles/_template.md` と同じ形式（先頭に title・description・slug・published・eyecatch・status の情報）で書き、`status: draft` にして compliance の審査を待つ
+- 冒頭の広告表記はサイト側で自動で入るので、本文には書かなくてよい

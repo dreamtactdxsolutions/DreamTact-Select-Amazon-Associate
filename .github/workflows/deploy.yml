@@ -39,6 +39,8 @@ jobs:
         env:
           # GitHubのリポジトリ設定 > Secrets and variables > Actions > Variables に GA_MEASUREMENT_ID を登録する
           VITE_GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
+          # 記事ページのAmazonリンクに付けるトラッキングID（未登録なら dreamtactaffi-22）
+          AMAZON_TRACKING_ID: ${{ vars.AMAZON_TRACKING_ID }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

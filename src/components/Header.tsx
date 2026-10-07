@@ -62,6 +62,10 @@ export const Header: React.FC<HeaderProps> = ({
           >
             スペック比較
           </button>
+          {/* 記事は静的ページとして別に生成しているので、通常のリンクで移動する */}
+          <a className="nav-link" href="./articles/">
+            記事
+          </a>
           {isAdmin && (
             <>
               <button

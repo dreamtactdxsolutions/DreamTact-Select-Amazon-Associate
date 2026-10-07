@@ -29,7 +29,9 @@ Amazonアソシエイト（日本）で **月次利益10万円**（利益 = 紹�
 2. バイヤー（`buyer-*`）が担当ジャンルの紹介候補を出す（共通ルールは `ops/buying/README.md`）。`marketing` が候補の中から狙うキーワードと記事の企画を決める
 3. `creator` が下書きを作り、`designer` がアイキャッチやバナーを作る
 4. `compliance` が文章と画像を審査する（合格したものだけ `ops/content/approved/` へ）
-5. オーナーが最終確認して公開する
+5. オーナーが最終確認して公開する。公開する記事は `content/articles/<slug>.md`（書き方は `content/articles/_template.md`）に置き、`status: published` にする。`main` に入ると自動でサイトに出る
+   - 公開記事に「要確認」・不正なASIN・【実機レビュー】・「使ってみた」が残っていると、ビルドが止まって公開されない
+   - 下書きの見た目は `npm run preview:drafts` で確認できる
 6. `revisit-follow` が公開済み記事やセール情報から再訪施策を作る
 
 ## 絶対ルール（全エージェント共通）
