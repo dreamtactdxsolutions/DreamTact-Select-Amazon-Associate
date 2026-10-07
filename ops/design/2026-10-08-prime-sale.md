@@ -5,7 +5,7 @@ status: draft
 - 作成: designer（2026-10-07 作業、ファイル名は記事予定日の 2026-10-08）
 - ツール: SVGを手書き（Canva・Metricoolは不使用）
 - トーン: `ops/design/brand.md`、前回の `public/images/articles/magnifica-s-vs-start.svg` に合わせた（濃紺×ゴールド、白地に濃紺のPRラベル40px）
-- 審査: compliance 未審査。書き出し（PNG化）・公開・SNS投稿はしていない
+- 審査: compliance 2026-10-08 approved（末尾の審査結果参照）。PNGは public/images/articles/prime-sale-2026-price-check.png に書き出し済み（指揮役）。公開・SNS投稿はオーナー承認後
 
 ## 作成物
 
@@ -13,7 +13,7 @@ status: draft
 |---|---|---|---|
 | `ops/design/2026-10-08-prime-sale-eyecatch.svg` | 記事アイキャッチ／OGP画像 | 1200×630 | SVG |
 
-`public/images/articles/` へのコピーとPNG書き出しはしていない（審査合格とオーナー承認の後）。
+`public/images/articles/` にSVGとPNGを配置済み（2026-10-08 指揮役）。
 
 ## 画像に入っている文字
 
