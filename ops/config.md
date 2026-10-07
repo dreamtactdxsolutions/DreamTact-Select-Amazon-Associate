@@ -1,5 +1,10 @@
 # 接続先の設定（オーナーが記入）
 
+## サイトURL
+- 正式なURL: https://select.dream-tact-dx-solutions.com/ （Vercel）
+- 予備のURL（canonicalで正式なURLを指す）: https://dreamtactdxsolutions.github.io/DreamTact-Select-Amazon-Associate/ 、 https://dream-tact-select-amazon-associate.vercel.app/
+- 記事やSNS、メルマガで案内するURLは、必ず正式なURLを使う
+
 ## SNS（Metricool）
 - アフィリエイト用ブランド名: 未設定
 - 対象アカウント: 未設定（例：X @xxxx、Instagram @xxxx、Threads @xxxx）
