@@ -5,7 +5,7 @@ slug: room-drying-guide
 published: 2026-10-10
 updated:
 eyecatch: images/articles/room-drying-guide.png
-status: draft
+status: published
 ---
 
 <!--
@@ -56,6 +56,7 @@ status: draft
    置き換え前：商品名の表記では、粉タイプのアメリカ製の商品です。
    置き換え後：商品名の表記では、粉タイプのアメリカ製の酸素系漂白剤で、商品名に「過炭酸ナトリウム」の表記もあります。
 最終審査：approved（2026-10-08。compliance 指定の置き換え6件を反映。指揮役）
+オーナーが公開を承認（2026-10-08）
 -->
 
 **部屋干しの「乾きにくい」「におい」「白い衣類のくすみ」は、「乾かす」「洗う」「戻す」の3つの役割に分けて考えると、何から手をつけるか決めやすくなります。**

@@ -1,6 +1,6 @@
 # SNS投稿文：部屋干しの悩みを3つの役割で整理｜除湿機・部屋干し洗剤・酸素系漂白剤の選び方
 
-- 対象記事：content/articles/room-drying-guide.md（status: draft、compliance 審査待ち）
+- 対象記事：content/articles/room-drying-guide.md（2026-10-08 オーナーが公開を承認）
 - 記事URL：https://select.dream-tact-dx-solutions.com/articles/room-drying-guide/
 - 作成：creator（2026-10-09）
 - status: draft（compliance の審査待ち。投稿・予約はオーナーの承認後）
