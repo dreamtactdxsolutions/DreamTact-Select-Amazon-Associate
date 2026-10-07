@@ -122,31 +122,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
           </div>
 
-          {/* ユーザーのクチコミ */}
-          <div className="detail-section">
-            <h3 className="section-title">購入者・ユーザーの声</h3>
-            <div className="testimonials-grid">
-              {product.testimonials.map((t, index) => (
-                <div className="testimonial-card" key={index}>
-                  <div className="t-header">
-                    <span className="t-user">{t.user}</span>
-                    <div className="t-stars">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={12}
-                          fill={i < t.rating ? 'var(--accent-primary)' : 'none'}
-                          color={i < t.rating ? 'var(--accent-primary)' : 'var(--text-muted)'}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <p className="t-comment">「{t.comment}」</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
 
         {/* フッターの購入ボタン */}
@@ -455,49 +430,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         }
 
         /* クチコミ */
-        .testimonials-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-
-        @media (max-width: 768px) {
-          .testimonials-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-
-        .testimonial-card {
-          background: rgba(255, 255, 255, 0.01);
-          border: 1px solid var(--border-color);
-          border-radius: 8px;
-          padding: 14px;
-        }
-
-        .t-header {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 8px;
-        }
-
-        .t-user {
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: var(--text-primary);
-        }
-
-        .t-stars {
-          display: flex;
-          gap: 1px;
-        }
-
-        .t-comment {
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          line-height: 1.4;
-          font-style: italic;
-        }
-
         .modal-footer {
           display: flex;
           justify-content: flex-end;
