@@ -5,7 +5,7 @@ slug: prime-sale-2026-price-check
 published: 2026-10-09
 updated:
 eyecatch: images/articles/prime-sale-2026-price-check.png
-status: draft
+status: published
 ---
 
 <!--
@@ -57,6 +57,7 @@ status: draft
    置き換え前：①〜④・⑥〜⑩の商品ページに共通：
    置き換え後：①〜⑩の商品ページに共通：
 最終審査：approved（2026-10-08。compliance 指定の置き換え5件を反映。指揮役）
+オーナーが公開を承認（2026-10-08）
 -->
 
 
