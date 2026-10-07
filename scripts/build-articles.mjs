@@ -83,6 +83,32 @@ const renderBody = (body) => {
   return marked.parse(withLinks);
 };
 
+// シェアボタン。各SNSの公式スクリプトは読み込まず、シェア用URLへのリンクだけにする
+const shareBar = (title, url, position) => {
+  const t = encodeURIComponent(title);
+  const u = encodeURIComponent(url);
+  const hatena = `https://b.hatena.ne.jp/entry/s/${url.replace(/^https:\/\//, '')}`;
+  return `<div class="share" data-position="${position}">
+<span class="share-label">シェア</span>
+<a class="share-btn share-x" data-share="x" href="https://x.com/intent/post?text=${t}&url=${u}" target="_blank" rel="noopener noreferrer">X</a>
+<a class="share-btn share-line" data-share="line" href="https://social-plugins.line.me/lineit/share?url=${u}" target="_blank" rel="noopener noreferrer">LINE</a>
+<a class="share-btn share-hatena" data-share="hatena" href="${hatena}" target="_blank" rel="noopener noreferrer">はてブ</a>
+<button class="share-btn share-copy" data-share="copy" data-url="${escapeHtml(url)}" type="button">URLをコピー</button>
+</div>`;
+};
+
+// URLコピーのボタン（GA4の有無に関係なく動かす）
+const SHARE_SCRIPT = `<script>
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('.share-copy');
+  if (!b) return;
+  var url = b.getAttribute('data-url');
+  var done = function(){ var t = b.textContent; b.textContent = 'コピーしました'; setTimeout(function(){ b.textContent = t; }, 1600); };
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, function(){ window.prompt('URLをコピーしてください', url); }); }
+  else { window.prompt('URLをコピーしてください', url); }
+});
+</script>`;
+
 const gaSnippet = () =>
   gaId
     ? `<script>
@@ -99,6 +125,12 @@ const gaSnippet = () =>
     if (!a) return;
     var m = a.href.match(/\\/dp\\/([A-Z0-9]{10})/i);
     gtag('event', 'amazon_click', { asin: m ? m[1] : '', placement: 'article', link_text: (a.textContent || '').trim().slice(0, 100) });
+  }, true);
+  document.addEventListener('click', function(e){
+    var s = e.target.closest && e.target.closest('[data-share]');
+    if (!s) return;
+    var box = s.closest('.share');
+    gtag('event', 'share', { method: s.getAttribute('data-share'), position: box ? box.getAttribute('data-position') : '', content_type: 'article', item_id: location.pathname });
   }, true);
 })();
 </script>`
@@ -182,6 +214,14 @@ h1{font-size:28px;line-height:1.5;margin-bottom:12px}
 .article th,.article td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
 .article th{background:var(--bg3);white-space:nowrap}
 .article a[href*="amazon.co.jp"]{display:inline-block;background:linear-gradient(135deg,#ffb84d,#ff9900);color:#111;font-weight:700;text-decoration:none;padding:10px 20px;border-radius:999px;margin:4px 0}
+.share{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 24px}
+.share-label{color:var(--text2);font-size:13px;margin-right:4px}
+.share-btn{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
+.share-btn:hover{border-color:var(--gold)}
+.share-x{background:#000;border-color:#333}
+.share-line{background:#06c755;border-color:#06c755;color:#fff}
+.share-hatena{background:#00a4de;border-color:#00a4de;color:#fff}
+.share-lead{margin:40px 0 10px;color:var(--text2);font-size:14px}
 .list{list-style:none}
 .article ul.list{margin-left:0}
 .list li{border:1px solid var(--border);border-radius:12px;margin-bottom:16px;background:var(--bg2)}
@@ -286,10 +326,14 @@ const main = () => {
 ${a.isDraft ? '<p class="draft-note">これは下書きのプレビューです（検索エンジンには表示されません）</p>\n' : ''}<p class="pr-note">${PR_DISCLOSURE}</p>
 <h1>${escapeHtml(a.meta.title)}</h1>
 <p class="dates">${dates}</p>
+${shareBar(a.meta.title, canonical, 'top')}
 ${eyecatch ? `<img class="eyecatch" src="${rel}${escapeHtml(eyecatch)}" alt="${escapeHtml(a.meta.title)}" width="1200" height="630" />\n` : ''}<article class="article">
 ${renderBody(a.body)}
 </article>
-</div></main>`,
+<p class="share-lead">この記事が役に立ったら、家族や友だちにもシェアしてください。</p>
+${shareBar(a.meta.title, canonical, 'bottom')}
+</div></main>
+${SHARE_SCRIPT}`,
     });
     const outDir = join(distDir, 'articles', a.slug);
     mkdirSync(outDir, { recursive: true });
