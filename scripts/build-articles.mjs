@@ -134,6 +134,7 @@ ${main}
 <footer class="site-footer"><div class="wrap">
   <p>${ASSOCIATE_STATEMENT}</p>
   <p>価格・在庫・ランキングは記載時点の情報です。最新の情報は各商品ページでご確認ください。</p>
+  <p class="footer-links"><a href="${rel}articles/">記事一覧</a>${FOOTER_PAGE_LINKS.map(([slug, label]) => existsSync(join(pagesDir, `${slug}.md`)) && /\nstatus: published\n/.test(readFileSync(join(pagesDir, `${slug}.md`), 'utf8')) ? `　<a href="${rel}${slug}/">${label}</a>` : '').join('')}</p>
   <p class="copy">© ${SITE_NAME}</p>
 </div></footer>
 </body>
@@ -144,6 +145,9 @@ const formatDate = (d) => {
   const [y, m, day] = d.split('-').map(Number);
   return `${y}年${m}月${day}日`;
 };
+
+// フッターに出す固定ページ（公開されているものだけリンクする）
+const FOOTER_PAGE_LINKS = [['about', '運営者情報'], ['privacy', 'プライバシーポリシー']];
 
 const CSS = `
 :root{--bg:#0a0f1d;--bg2:#111827;--bg3:#1f2937;--text:#f3f4f6;--text2:#9ca3af;--gold:#d4af37;--blue:#60a5fa;--border:#374151}
@@ -186,8 +190,48 @@ h1{font-size:28px;line-height:1.5;margin-bottom:12px}
 .list .d{color:var(--text2);font-size:14px}
 .site-footer{border-top:1px solid var(--border);color:var(--text2);font-size:13px;padding:24px 0 40px;line-height:1.8}
 .site-footer p{margin-bottom:6px}
+.site-footer a{color:var(--text2)}
 @media (max-width:600px){h1{font-size:23px}.article h2{font-size:20px}.site-header nav{gap:10px}}
 `;
+
+// content/pages/*.md を /<slug>/ に出す。記事と同じ公開チェック（要確認など）を通す
+const pagesDir = join(root, 'content', 'pages');
+const buildStaticPages = (failures) => {
+  const files = existsSync(pagesDir) ? readdirSync(pagesDir).filter((f) => f.endsWith('.md') && !f.startsWith('_')) : [];
+  const built = [];
+  for (const file of files) {
+    const raw = readFileSync(join(pagesDir, file), 'utf8').replace(/\r\n/g, '\n');
+    const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    if (!m) { failures.push(`${file}: 先頭の --- が無い`); continue; }
+    const meta = {};
+    for (const line of m[1].split('\n')) {
+      const kv = line.match(/^([A-Za-z_]+):\s*(.*)$/);
+      if (kv) meta[kv[1]] = kv[2].trim().replace(/^["']|["']$/g, '');
+    }
+    const slug = meta.slug || file.replace(/\.md$/, '');
+    const isDraft = meta.status !== 'published';
+    if (isDraft && !includeDrafts) continue;
+    const body = m[2].replace(/<!--[\s\S]*?-->/g, '');
+    if (!isDraft && /要確認/.test(`${meta.title}\n${meta.description}\n${body}`)) failures.push(`content/pages/${file}: 「要確認」が残っている`);
+    const html = pageShell({
+      rel: '../',
+      title: `${meta.title} | ${SITE_NAME}`,
+      description: meta.description || '',
+      canonical: `${SITE_URL}${slug}/`,
+      noindex: isDraft,
+      main: `<main><div class="wrap">
+${isDraft ? '<p class="draft-note">これは下書きのプレビューです（検索エンジンには表示されません）</p>\n' : ''}<h1>${escapeHtml(meta.title)}</h1>
+${meta.updated ? `<p class="dates">最終更新日：${formatDate(meta.updated)}</p>\n` : ''}<article class="article">
+${marked.parse(body)}
+</article>
+</div></main>`,
+    });
+    mkdirSync(join(distDir, slug), { recursive: true });
+    writeFileSync(join(distDir, slug, 'index.html'), html);
+    if (!isDraft) built.push({ slug });
+  }
+  return built;
+};
 
 const main = () => {
   if (!existsSync(distDir)) throw new Error('dist がありません。先に vite build を実行してください');
@@ -265,12 +309,31 @@ ${renderBody(a.body)}
     main: `<main><div class="wrap"><p class="pr-note">${PR_DISCLOSURE}</p><h1>記事一覧</h1><ul class="list">\n${listItems}\n</ul></div></main>`,
   }));
 
+  // トップページの「新着記事」用（公開記事だけ）
+  writeFileSync(join(distDir, 'articles', 'index.json'), JSON.stringify(
+    pages.filter((a) => !a.isDraft).map((a) => ({
+      slug: a.slug,
+      title: a.meta.title,
+      description: a.meta.description,
+      published: a.meta.published,
+      eyecatch: a.meta.eyecatch ? a.meta.eyecatch.replace(/^\//, '') : '',
+    })),
+  ));
+
+  // 固定ページ（運営者情報・プライバシーポリシーなど）
+  const staticPages = buildStaticPages(failures);
+  if (failures.length) {
+    console.error(`公開ページに問題があるため、ビルドを止めました。\n${failures.join('\n')}`);
+    process.exit(1);
+  }
+
   // sitemap.xml（公開記事だけ）
   const published = pages.filter((a) => !a.isDraft);
   const urls = [
     `  <url><loc>${SITE_URL}</loc></url>`,
     ...(published.length ? [`  <url><loc>${SITE_URL}articles/</loc></url>`] : []),
     ...published.map((a) => `  <url><loc>${SITE_URL}articles/${a.slug}/</loc><lastmod>${a.meta.updated || a.meta.published}</lastmod></url>`),
+    ...staticPages.map((pg) => `  <url><loc>${SITE_URL}${pg.slug}/</loc></url>`),
   ];
   writeFileSync(join(distDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`);
 

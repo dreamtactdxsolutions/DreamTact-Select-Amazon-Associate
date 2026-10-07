@@ -1,5 +1,10 @@
 # 接続先の設定（オーナーが記入）
 
+## 運営者情報（サイトの /about/ に掲載）
+- 運営者名: DreamTact（代表者名は載せない）
+- 所在地: 神奈川県足柄上郡（市区町村以下は載せない）
+- お問い合わせ: wk.japanstore@gmail.com
+
 ## サイトURL
 - 正式なURL: https://select.dream-tact-dx-solutions.com/ （Vercel）
 - 予備のURL（canonicalで正式なURLを指す）: https://dreamtactdxsolutions.github.io/DreamTact-Select-Amazon-Associate/ 、 https://dream-tact-select-amazon-associate.vercel.app/

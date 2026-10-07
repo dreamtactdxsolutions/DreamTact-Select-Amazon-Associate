@@ -21,6 +21,11 @@ export interface Product {
   description: string;
   pros: string[];
   cons: string[];
+  // この商品を扱っている記事（あれば商品カードと詳細から案内する）
+  relatedArticle?: {
+    slug: string;
+    title: string;
+  };
 }
 
 export const products: Product[] = [
@@ -220,6 +225,10 @@ export const products: Product[] = [
     reviewsCount: 4657,
     image: espressoImg,
     asin: 'B088HJCVDX', // ECAM22112B ブラック。価格・評価は2026-10-08にAmazonの商品ページで確認
+    relatedArticle: {
+      slug: 'magnifica-s-vs-start',
+      title: 'マグニフィカSとマグニフィカ スタートの違いを比較',
+    },
     stars: 5,
     rank: 1,
     specs: {

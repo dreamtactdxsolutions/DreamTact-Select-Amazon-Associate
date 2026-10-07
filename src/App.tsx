@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { products, getPriceRanges, getAffiliateLink } from './data/products';
+import { products, getPriceRanges } from './data/products';
 import type { Product } from './data/products';
 import { Header } from './components/Header';
 import { AssociateConfig } from './components/AssociateConfig';
@@ -10,6 +10,7 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { ArticleGenerator } from './components/ArticleGenerator';
 import { Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 import { initAnalytics, trackSectionView } from './analytics';
+import { LatestArticles } from './components/LatestArticles';
 
 function App() {
   // 管理者モードの判定 (localhost であるか、URLに ?admin=true があるか、localStorage に記録がある場合)
@@ -116,20 +117,25 @@ function App() {
             <section className="hero-section text-center">
               <div className="hero-badge">
                 <Sparkles size={14} className="icon-gold" />
-                <span>2026年最新 Amazon売れ筋・厳選セレクト</span>
+                <span>Amazonで買えるモノを比べて選ぶ買い物ガイド</span>
               </div>
               <h1 className="hero-title">
-                日常を極上にアップデートする<br />
-                <span className="gradient-gold-text">至高の厳選プロダクト</span>
+                比べて選ぶ、<br />
+                <span className="gradient-gold-text">暮らしの買い物ガイド</span>
               </h1>
               <p className="hero-subtitle">
-                Amazonで評価4.5以上、口コミでも絶賛されている人気商品だけをリサーチ。<br />
-                あなたの生活の質（QOL）を高める逸品を、カテゴリー・価格帯別にご提案します。
+                家電・ガジェット・美容家電・日用品・本まで、スペックと価格を比べて「どれを選ぶか」を整理しています。<br />
+                価格や評価は確認した日付つきで掲載しています。
               </p>
+              <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
               
               <div className="hero-actions">
+                <a className="btn-amazon" href="./articles/">
+                  記事を読む
+                  <ArrowRight size={16} />
+                </a>
                 <button 
-                  className="btn-amazon" 
+                  className="btn-outline" 
                   onClick={() => {
                     setSelectedCategory('all');
                     setSelectedPrice('all');
@@ -137,13 +143,17 @@ function App() {
                   }}
                 >
                   ランキングを見る
-                  <ArrowRight size={16} />
                 </button>
-                <button className="btn-outline" onClick={() => setIsConfigOpen(true)}>
-                  アソシエイトIDを設定
-                </button>
+                {isAdmin && (
+                  <button className="btn-outline" onClick={() => setIsConfigOpen(true)}>
+                    アソシエイトIDを設定
+                  </button>
+                )}
               </div>
             </section>
+
+            {/* 新着記事 */}
+            <LatestArticles />
 
             {/* クイックリンク・カードセクション */}
             <section className="features-grid">
@@ -155,7 +165,7 @@ function App() {
                   setActiveSection('rankings');
                 }}
               >
-                <span className="feat-badge">人気 No.1</span>
+                <span className="feat-badge">ガジェット</span>
                 <h3>最新ガジェット部門</h3>
                 <p>スマートウォッチやワイヤレスイヤホンなど、生産性を高める最新デジタル機器。</p>
                 <span className="feat-link">
@@ -171,7 +181,7 @@ function App() {
                   setActiveSection('rankings');
                 }}
               >
-                <span className="feat-badge">売れ筋</span>
+                <span className="feat-badge">家電</span>
                 <h3>スマート家電部門</h3>
                 <p>吸引・水拭きを全自動化するロボット掃除機など、暮らしにゆとりを生むスマート家電。</p>
                 <span className="feat-link">
@@ -196,39 +206,6 @@ function App() {
               </div>
             </section>
 
-            {/* 特集セクション (本日のイチオシ商品) */}
-            <section className="featured-product-section glass-panel">
-              <div className="featured-grid">
-                <div className="featured-img-wrapper">
-                  <img src={products[0].image} alt={products[0].name} className="featured-img" />
-                  <span className="featured-label">本日の注目プロダクト</span>
-                </div>
-                <div className="featured-info">
-                  <span className="badge badge-gold">総合評価 4.8 | ベストセラー</span>
-                  <h2>{products[0].name}</h2>
-                  <p className="featured-tagline">{products[0].tagline}</p>
-                  <p className="featured-desc">
-                    スマートウォッチ市場で圧倒的な支持を集めるモデル。常時表示対応の美しいAMOLEDディスプレイと、14日間持続する驚異的なバッテリーを両立。健康管理機能も網羅し、アフィリエイトでのコンバージョン率（購入率）も非常に高い名作です。
-                  </p>
-                  <div className="featured-cta">
-                    <button 
-                      className="btn-outline" 
-                      onClick={() => setSelectedProduct(products[0])}
-                    >
-                      詳細レビューを読む
-                    </button>
-                    <a 
-                      href={getAffiliateLink(products[0].asin, associateId)}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="btn-amazon"
-                    >
-                      Amazonでチェックする
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
           </div>
         )}
 
@@ -372,7 +349,8 @@ function App() {
         <div className="footer-container container">
           <div className="footer-brand">
             <span className="brand-name">DreamTact Select</span>
-            <p className="footer-tagline">Amazonの人気商品を徹底リサーチして届ける専門メディア</p>
+            <p className="footer-tagline">Amazonで買えるモノを比べて選ぶ買い物ガイド</p>
+            <p className="footer-links"><a href="./articles/">記事一覧</a>　<a href="./about/">運営者情報</a>　<a href="./privacy/">プライバシーポリシー</a></p>
           </div>
           
           <div className="footer-legal glass-panel">
@@ -384,7 +362,7 @@ function App() {
           </div>
           
           <div className="footer-bottom">
-            <span>© {new Date().getFullYear()} DreamTact. All rights reserved. Built with premium design.</span>
+            <span>© {new Date().getFullYear()} DreamTact Select</span>
           </div>
         </div>
       </footer>
@@ -738,6 +716,22 @@ function App() {
           font-size: 0.85rem;
           color: var(--text-secondary);
           margin-top: 4px;
+        }
+
+        .hero-pr-note {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          margin-top: -8px;
+          margin-bottom: 24px;
+        }
+
+        .footer-links {
+          margin-top: 8px;
+          font-size: 0.85rem;
+        }
+
+        .footer-links a {
+          color: var(--text-secondary);
         }
 
         .footer-legal {
