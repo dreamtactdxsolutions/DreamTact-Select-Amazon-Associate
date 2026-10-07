@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="500" viewBox="0 0 1500 500" role="img" aria-labelledby="t">
-  <title id="t">DreamTact Select ヘッダー：家電・ガジェットを、スペックと価格で比べる。</title>
+  <title id="t">DreamTact Select ヘッダー：家電・コスメ・日用品・本まで、比べて選ぶ。</title>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0a0f1d"/>
@@ -31,8 +31,8 @@
   <circle cx="900" cy="250" r="190" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.08"/>
 
   <!-- 文字は中央やや右（x=900基準）・上下中央付近（y=170〜340）に配置 -->
-  <text x="900" y="150" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="30" font-weight="700" letter-spacing="6" fill="#d4af37">家電・ガジェット比較</text>
+  <text x="900" y="150" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="30" font-weight="700" letter-spacing="6" fill="#d4af37">暮らしの買い物ガイド</text>
   <text x="900" y="250" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="104" font-weight="800" letter-spacing="1" fill="url(#goldText)">DreamTact Select</text>
   <rect x="660" y="282" width="480" height="3" fill="url(#rule)"/>
-  <text x="900" y="345" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="700" fill="#f3f4f6">家電・ガジェットを、スペックと価格で比べる。</text>
+  <text x="900" y="345" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="700" fill="#f3f4f6">家電・コスメ・日用品・本まで、比べて選ぶ。</text>
 </svg>
