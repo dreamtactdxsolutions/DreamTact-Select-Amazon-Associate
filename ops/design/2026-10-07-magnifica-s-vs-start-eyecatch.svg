@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">マグニフィカS vs マグニフィカ スタート 違いを比較</title>
+  <desc id="desc">DreamTact Select の記事アイキャッチ。濃紺の背景に、左にマグニフィカS（ゴールド）、右にマグニフィカ スタート（青）の名前を置き、中央にVSのマーク。下に「違いを比較」と「スペック比較・選び方」。左上にPR表記。商品写真やロゴは使っていない。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1d"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3cf55"/>
+      <stop offset="0.5" stop-color="#d4af37"/>
+      <stop offset="1" stop-color="#b8860b"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- 装飾：コーヒーの湯気を思わせる薄い同心円（商品を描かない抽象図形） -->
+  <g fill="none" stroke="#d4af37" stroke-opacity="0.07" stroke-width="2">
+    <circle cx="600" cy="300" r="190"/>
+    <circle cx="600" cy="300" r="250"/>
+    <circle cx="600" cy="300" r="310"/>
+  </g>
+  <!-- 上下のゴールドライン -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#gold)"/>
+  <rect x="0" y="624" width="1200" height="6" fill="url(#gold)"/>
+
+  <!-- PR表記（左上） -->
+  <g>
+    <rect x="40" y="34" width="68" height="36" rx="8" fill="#1f2937" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="74" y="59" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="20" font-weight="700" fill="#f3f4f6">PR</text>
+  </g>
+
+  <!-- 記事タイプ（右上） -->
+  <text x="1160" y="59" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="22" font-weight="500" fill="#9ca3af">デロンギ 全自動コーヒーマシン</text>
+
+  <!-- 左カード：マグニフィカS（ゴールド） -->
+  <g>
+    <rect x="80" y="120" width="420" height="250" rx="20" fill="#111827" stroke="#d4af37" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="80" y="120" width="420" height="8" rx="4" fill="url(#gold)"/>
+    <text x="290" y="200" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="30" font-weight="500" fill="#9ca3af">デロンギ</text>
+    <text x="290" y="300" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="58" font-weight="900" fill="url(#gold)">マグニフィカS</text>
+  </g>
+
+  <!-- 右カード：マグニフィカ スタート（青） -->
+  <g>
+    <rect x="700" y="120" width="420" height="250" rx="20" fill="#111827" stroke="#3b82f6" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="700" y="120" width="420" height="8" rx="4" fill="url(#blue)"/>
+    <text x="910" y="200" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="30" font-weight="500" fill="#9ca3af">デロンギ</text>
+    <text x="910" y="268" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="56" font-weight="900" fill="url(#blue)">マグニフィカ</text>
+    <text x="910" y="334" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="56" font-weight="900" fill="url(#blue)">スタート</text>
+  </g>
+
+  <!-- VS -->
+  <g>
+    <circle cx="600" cy="245" r="62" fill="#0a0f1d" stroke="url(#gold)" stroke-width="4"/>
+    <text x="600" y="266" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="56" font-weight="800" fill="#f3f4f6">VS</text>
+  </g>
+
+  <!-- メインコピー -->
+  <text x="600" y="478" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="80" font-weight="900" fill="#f3f4f6">違いを<tspan fill="url(#gold)">比較</tspan></text>
+
+  <!-- サブコピー -->
+  <text x="600" y="536" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="30" font-weight="500" fill="#9ca3af">スペック比較でわかる、どっちを選ぶか</text>
+
+  <!-- サイト名 -->
+  <text x="1160" y="596" text-anchor="end" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="20" font-weight="600" fill="#d4af37" letter-spacing="1">DreamTact Select</text>
+</svg>
