@@ -183,6 +183,7 @@ h1{font-size:28px;line-height:1.5;margin-bottom:12px}
 .article th{background:var(--bg3);white-space:nowrap}
 .article a[href*="amazon.co.jp"]{display:inline-block;background:linear-gradient(135deg,#ffb84d,#ff9900);color:#111;font-weight:700;text-decoration:none;padding:10px 20px;border-radius:999px;margin:4px 0}
 .list{list-style:none}
+.article ul.list{margin-left:0}
 .list li{border:1px solid var(--border);border-radius:12px;margin-bottom:16px;background:var(--bg2)}
 .list a{display:block;padding:16px;color:var(--text);text-decoration:none}
 .list a:hover{border-color:var(--gold)}
@@ -326,6 +327,28 @@ ${renderBody(a.body)}
     console.error(`公開ページに問題があるため、ビルドを止めました。\n${failures.join('\n')}`);
     process.exit(1);
   }
+
+  // 404ページ。どのURLで表示されるか分からないので、リンクは正式URLの絶対パスにする
+  const latest = pages.filter((a) => !a.isDraft).slice(0, 3);
+  writeFileSync(join(distDir, '404.html'), pageShell({
+    rel: SITE_URL,
+    title: `ページが見つかりません | ${SITE_NAME}`,
+    description: 'お探しのページは見つかりませんでした。',
+    canonical: SITE_URL,
+    noindex: true,
+    main: `<main><div class="wrap">
+<h1>ページが見つかりません</h1>
+<p class="dates">URLが間違っているか、ページが移動・削除された可能性があります。</p>
+<article class="article">
+<p>URLの最後に「）」や「、」などの文字が付いていないか確認してください。</p>
+<ul>
+<li><a href="${SITE_URL}">トップページへ</a></li>
+<li><a href="${SITE_URL}articles/">記事一覧へ</a></li>
+</ul>
+${latest.length ? `<h2>新着記事</h2>\n<ul class="list">\n${latest.map((a) => `<li><a href="${SITE_URL}articles/${a.slug}/"><p class="t">${escapeHtml(a.meta.title)}</p><p class="d">${a.meta.published ? formatDate(a.meta.published) : ''}</p></a></li>`).join('\n')}\n</ul>` : ''}
+</article>
+</div></main>`,
+  }));
 
   // sitemap.xml（公開記事だけ）
   const published = pages.filter((a) => !a.isDraft);
