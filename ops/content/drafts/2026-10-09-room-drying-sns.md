@@ -42,3 +42,19 @@ https://select.dream-tact-dx-solutions.com/articles/room-drying-guide/
 https://select.dream-tact-dx-solutions.com/articles/room-drying-guide/
 
 #部屋干し #洗濯 #部屋干し対策 #暮らしの工夫
+
+## 審査結果
+
+- 審査: compliance（2026-10-08）。照合元は ops/research/2026-10-08-prime-sale-candidates-amazon.md の②⑧⑨と、対象記事 content/articles/room-drying-guide.md のみ（Web検索・WebFetchは不使用）
+- 判定: **approved**（文面として合格。ただし記事が合格・公開され、オーナーが承認するまで予約・投稿しない。Metricool は ops/config.md のアフィリエイト用ブランドが設定済みの場合のみ使用）
+
+### 合格した項目
+- PR表記が本文の先頭にある（X「#PR」、Threads／Instagram「【PR】」）
+- Amazonリンクなし。自サイトの記事URLのみ
+- 価格・割引率・在庫表示を載せていない。確認日（2026年10月8日）と販売元（除湿機・アタックZEROが出品者）は一次情報と一致
+- 効果の断定なし（においが消える・白くなる・早く乾く等なし）。洗剤・漂白剤は「必ず製品の表示に従う」とだけ書き、使用量や併用などの手順なし
+- メーカー宣伝文句・星の評価なし。「実機は使っておらず」を明記。「無理に買わなくて大丈夫」と抑制的
+- X本文は重み付き文字数で約267（URL23換算込み）で、上限280以内。語を足す修正をする場合は上限に注意
+
+### 注意（修正不要）
+- 長文版の「除湿機とアタックZEROは、販売元が…出品者でした」は事実どおり。記事側では3品の文脈でオキシクリーンが Amazon 販売と読まれないよう注記を足す指摘をしたが、SNSは販売元の対比をしていないためそのままで可。記事の文面を大きく変えた場合は、このSNS文も照合し直す
