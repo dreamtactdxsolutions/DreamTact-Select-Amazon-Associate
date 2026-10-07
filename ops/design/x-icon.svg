@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-labelledby="t">
+  <title id="t">DreamTact Select アイコン（勲章モチーフ＋DT）</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="55%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0a0f1d"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3cf55"/>
+      <stop offset="55%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+  <!-- 背景は全面塗り（円形切り抜き後も濃紺が残る） -->
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <!-- 参考ガイド：重要要素は中心(200,200)半径150の内側。下の要素はすべて半径約140以内 -->
+  <!-- 勲章のリボン（Award アイコン風） -->
+  <polygon points="150,226 128,322 160,305 182,328 198,252" fill="#b8860b"/>
+  <polygon points="250,226 272,322 240,305 218,328 202,252" fill="#b8860b"/>
+  <!-- 勲章の円盤 -->
+  <circle cx="200" cy="168" r="92" fill="url(#gold)"/>
+  <circle cx="200" cy="168" r="78" fill="none" stroke="#0a0f1d" stroke-width="4" opacity="0.55"/>
+  <!-- モノグラム -->
+  <text x="200" y="196" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="84" font-weight="900" letter-spacing="-2" fill="#0a0f1d">DT</text>
+</svg>
