@@ -350,7 +350,7 @@ function App() {
           <div className="footer-brand">
             <span className="brand-name">DreamTact Select</span>
             <p className="footer-tagline">Amazonで買えるモノを比べて選ぶ買い物ガイド</p>
-            <p className="footer-links"><a href="./articles/">記事一覧</a></p>
+            <p className="footer-links"><a href="./articles/">記事一覧</a>　<a href="./about/">運営者情報</a>　<a href="./privacy/">プライバシーポリシー</a></p>
           </div>
           
           <div className="footer-legal glass-panel">

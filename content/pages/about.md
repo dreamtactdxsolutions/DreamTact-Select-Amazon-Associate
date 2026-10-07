@@ -3,13 +3,8 @@ title: 運営者情報
 description: DreamTact Select の運営者情報と、記事の作り方・広告についての方針です。
 slug: about
 updated: 2026-10-09
-status: draft
+status: published
 ---
-
-<!--
-公開前に「要確認」をすべて埋める（残っているとビルドが止まって公開されない）。
-オーナーに確認すること：運営者名（会社名・屋号）、代表者名を載せるか、問い合わせ先（メールアドレスまたはフォーム）
--->
 
 ## サイトについて
 
@@ -20,9 +15,9 @@ DreamTact Select は、Amazonで買える家電・ガジェット・美容家電
 | 項目 | 内容 |
 |---|---|
 | サイト名 | DreamTact Select |
-| 運営者 | 要確認（会社名・屋号） |
-| 所在地 | 要確認（載せるかどうか） |
-| お問い合わせ | 要確認（メールアドレスまたはフォーム） |
+| 運営者 | DreamTact |
+| 所在地 | 神奈川県足柄上郡 |
+| お問い合わせ | wk.japanstore@gmail.com |
 | URL | https://select.dream-tact-dx-solutions.com/ |
 
 ## 記事の作り方

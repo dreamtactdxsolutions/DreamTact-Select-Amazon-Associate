@@ -3,15 +3,10 @@ title: プライバシーポリシー
 description: DreamTact Select における個人情報・アクセス解析・広告の取り扱いについて。
 slug: privacy
 updated: 2026-10-09
-status: draft
+status: published
 ---
 
-<!--
-公開前に「要確認」をすべて埋める（残っているとビルドが止まって公開されない）。
-運営者名・問い合わせ先は about.md とそろえる。
--->
-
-DreamTact Select（以下「当サイト」）の運営者（要確認：運営者名）は、当サイトをご利用の方の情報を次のとおり取り扱います。
+DreamTact Select（以下「当サイト」）の運営者（DreamTact）は、当サイトをご利用の方の情報を次のとおり取り扱います。
 
 ## アクセス解析ツールについて
 
@@ -39,4 +34,5 @@ Amazonへのリンクをクリックした後の購入の情報は、Amazonが�
 
 ## お問い合わせ先
 
-要確認（メールアドレスまたはフォーム）
+DreamTact
+メール：wk.japanstore@gmail.com
