@@ -7,11 +7,16 @@ Amazonアソシエイト（日本）で **月次利益10万円**（利益 = 紹�
 - 紹介売上 約330万円/月 → 注文 約800件/月 → Amazonへのクリック 1〜1.6万/月 → サイトPV 10〜30万/月
 
 ## チーム構成
-メインのセッション（Claude）が指揮役として、`.claude/agents/` の6人のサブエージェントに仕事を振る。
+メインのセッション（Claude）が指揮役として、`.claude/agents/` の11人のサブエージェントに仕事を振る。
 サブエージェント同士は直接やり取りしない。成果物は `ops/` のファイルで受け渡す。
 
 | エージェント | 役割 | 主な出力先 |
 |---|---|---|
+| `buyer-beauty`（女性向けアイテム・コスメ） | 女性に人気のアイテム・コスメ・美容家電の候補選び | `ops/buying/beauty/` |
+| `buyer-gadget`（ガジェット・小物） | ガジェット好きが買いたくなるガジェット・小物の候補選び | `ops/buying/gadget/` |
+| `buyer-household`（生活雑貨） | 主婦が選ぶ生活雑貨・キッチン・掃除用品の候補選び | `ops/buying/household/` |
+| `buyer-books`（書籍） | Amazonで売れている本・話題の新刊の候補選び | `ops/buying/books/` |
+| `buyer-sale`（セール） | 大型セール・タイムセールの注目商品の候補選び | `ops/buying/sale/` |
 | `secretary`（秘書） | KPI管理、週次レポート、タスクの優先順位付け、オーナーの承認待ちリスト | `ops/reports/`, `ops/backlog.md` |
 | `marketing`（マーケティング） | キーワード調査、競合分析、SNS投稿計画、流入分析 | `ops/marketing/` |
 | `creator`（クリエイター） | 比較記事・ランキング記事・SNS投稿文の作成 | `ops/content/drafts/` |
@@ -21,7 +26,7 @@ Amazonアソシエイト（日本）で **月次利益10万円**（利益 = 紹�
 
 ## 標準フロー
 1. 毎週月曜：`secretary` が `ops/kpi.md` を読み、週次レポートとタスクを作る
-2. `marketing` が狙うキーワードと企画を出す
+2. バイヤー（`buyer-*`）が担当ジャンルの紹介候補を出す（共通ルールは `ops/buying/README.md`）。`marketing` が候補の中から狙うキーワードと記事の企画を決める
 3. `creator` が下書きを作り、`designer` がアイキャッチやバナーを作る
 4. `compliance` が文章と画像を審査する（合格したものだけ `ops/content/approved/` へ）
 5. オーナーが最終確認して公開する
