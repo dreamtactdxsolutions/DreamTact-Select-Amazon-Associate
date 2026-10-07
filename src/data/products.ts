@@ -215,11 +215,11 @@ export const products: Product[] = [
     tagline: 'ご自宅が本格カフェに。豆を挽くところから抽出、洗浄までワンタッチで行う極上マシン',
     category: 'kitchen',
     categoryLabel: 'ホーム・キッチン',
-    price: 65800,
-    rating: 4.7,
-    reviewsCount: 1890,
+    price: 69800,
+    rating: 4.6,
+    reviewsCount: 4657,
     image: espressoImg,
-    asin: 'B015GD7P5S',
+    asin: 'B088HJCVDX', // ECAM22112B ブラック。価格・評価は2026-10-07にAmazonの商品ページで確認
     stars: 5,
     rank: 1,
     specs: {
