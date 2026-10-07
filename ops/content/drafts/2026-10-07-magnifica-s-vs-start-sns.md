@@ -1,9 +1,9 @@
 # SNS投稿文：マグニフィカSとマグニフィカ スタートの違い（3機種スペック比較）
 
-- 対象記事：content/articles/magnifica-s-vs-start.md（status: draft）
+- 対象記事：content/articles/magnifica-s-vs-start.md（2026-10-08 公開済み）
 - 記事URL：https://select.dream-tact-dx-solutions.com/articles/magnifica-s-vs-start/
 - 作成：creator（2026-10-07）
-- status: needs-fix（2026-10-08 compliance 最終審査。末尾の「審査結果」参照。オーナー承認後に「レビュー待ち」予約まで。直接投稿しない）
+- status: approved（2026-10-08 compliance 最終審査に合格。投稿はオーナーが手動で行う）
 
 <!--
 - Amazonリンクは貼らず、自サイトの記事URLだけを使う

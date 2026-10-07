@@ -7,7 +7,8 @@
 
 ## SNS（Metricool）
 - アフィリエイト用ブランド名: 未設定
-- 対象アカウント: 未設定（例：X @xxxx、Instagram @xxxx、Threads @xxxx）
+- 対象アカウント: X @dreamtactselect（表示名「DreamTact Select｜セール・買い物ガイド」、2026-10-08 作成）。Instagram・Threads は未作成
+- Metricool のアフィリエイト用ブランドは未作成のため、X への投稿はオーナーが手動で行う
 
 **未設定のあいだは、Metricoolへの予約・投稿・分析の取得を一切行わない。**
 このリポジトリでは `.claude/settings.json` でMetricoolのツールをすべて禁止している。アフィリエイト用ブランドを用意したら、その禁止を外す。

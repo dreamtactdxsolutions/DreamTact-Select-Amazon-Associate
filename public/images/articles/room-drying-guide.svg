@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">部屋干しの悩みを3つの役割で整理 乾かす・洗う・戻す</title>
+  <desc id="desc">DreamTact Select の記事アイキャッチ。濃紺の背景、右上に洗濯ロープとシンプルな布の図形。中央に大きく「部屋干しの悩みを」「3つの役割で整理」、その下に3つのカード「乾かす（除湿機）」「洗う（部屋干し洗剤）」「戻す（酸素系漂白剤）」とハンガー・しずく・回転矢印のアイコン。左上に白地のPRラベル。商品写真・ロゴ・価格・割引率・効果表現は使っていない。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1d"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3cf55"/>
+      <stop offset="0.5" stop-color="#d4af37"/>
+      <stop offset="1" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- 上下のゴールドライン -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#gold)"/>
+  <rect x="0" y="624" width="1200" height="6" fill="url(#gold)"/>
+
+  <!-- 装飾：右上の洗濯ロープと布（抽象図形。実在商品の外観ではない） -->
+  <g fill="none" stroke="#d4af37" stroke-opacity="0.35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M820 70 Q968 92 1116 70"/>
+    <!-- タオル風の四角 -->
+    <path d="M884 80 L940 85 L938 128 L882 124 Z"/>
+    <!-- シャツ風の形 -->
+    <path d="M972 86 L990 82 Q1000 92 1010 82 L1028 86 L1040 100 L1030 106 L1026 102 L1026 132 L974 132 L974 102 L970 106 L960 100 Z"/>
+    <!-- 小さな布 -->
+    <path d="M1062 84 L1096 80 L1098 116 L1064 118 Z"/>
+  </g>
+  <g fill="#d4af37" fill-opacity="0.5">
+    <circle cx="911" cy="82" r="4"/>
+    <circle cx="1000" cy="86" r="4"/>
+    <circle cx="1080" cy="81" r="4"/>
+  </g>
+
+  <!-- PR表記（左上・主要文字の範囲 1040×480 の内側。白地に濃紺の太字40px） -->
+  <g>
+    <rect x="84" y="76" width="112" height="58" rx="10" fill="#f3f4f6"/>
+    <text x="140" y="119" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="900" fill="#0a0f1d" letter-spacing="2">PR</text>
+  </g>
+
+  <!-- メインコピー（2行） -->
+  <text x="600" y="214" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="80" font-weight="900" fill="#f3f4f6">部屋干しの悩みを</text>
+  <text x="600" y="310" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="80" font-weight="900" fill="#f3f4f6"><tspan font-family="'Outfit', 'Noto Sans JP', sans-serif" font-weight="800" fill="url(#gold)">3</tspan><tspan fill="url(#gold)">つの役割</tspan>で整理</text>
+
+  <!-- 3つの役割カード -->
+  <g font-family="'Noto Sans JP', sans-serif">
+    <!-- 1. 乾かす -->
+    <rect x="84" y="356" width="320" height="160" rx="16" fill="#111827" stroke="#374151" stroke-width="2"/>
+    <rect x="84" y="356" width="320" height="6" rx="3" fill="url(#gold)"/>
+    <!-- ハンガーのアイコン -->
+    <g fill="none" stroke="#d4af37" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M150 404 Q150 392 160 392 Q170 392 170 402 Q170 410 160 414 L160 420"/>
+      <path d="M160 420 L118 448 L202 448 Z"/>
+    </g>
+    <text x="226" y="436" font-size="48" font-weight="800" fill="#f3f4f6">乾かす</text>
+    <text x="244" y="490" text-anchor="middle" font-size="30" font-weight="500" fill="#9ca3af">除湿機</text>
+
+    <!-- 2. 洗う -->
+    <rect x="440" y="356" width="320" height="160" rx="16" fill="#111827" stroke="#374151" stroke-width="2"/>
+    <rect x="440" y="356" width="320" height="6" rx="3" fill="url(#gold)"/>
+    <!-- しずくのアイコン -->
+    <g fill="none" stroke="#d4af37" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M528 388 Q508 414 508 432 A20 20 0 0 0 548 432 Q548 414 528 388 Z"/>
+      <circle cx="562" cy="400" r="7"/>
+    </g>
+    <text x="588" y="436" font-size="48" font-weight="800" fill="#f3f4f6">洗う</text>
+    <text x="600" y="490" text-anchor="middle" font-size="30" font-weight="500" fill="#9ca3af">部屋干し洗剤</text>
+
+    <!-- 3. 戻す -->
+    <rect x="796" y="356" width="320" height="160" rx="16" fill="#111827" stroke="#374151" stroke-width="2"/>
+    <rect x="796" y="356" width="320" height="6" rx="3" fill="url(#gold)"/>
+    <!-- 回転矢印のアイコン -->
+    <g fill="none" stroke="#d4af37" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M906 404 A24 24 0 1 0 910 426"/>
+      <path d="M894 396 L907 404 L898 416"/>
+    </g>
+    <text x="938" y="436" font-size="48" font-weight="800" fill="#f3f4f6">戻す</text>
+    <text x="956" y="490" text-anchor="middle" font-size="30" font-weight="500" fill="#9ca3af">酸素系漂白剤</text>
+  </g>
+
+  <!-- サイト名 -->
+  <text x="1116" y="592" text-anchor="end" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#d4af37" letter-spacing="1">DreamTact Select</text>
+</svg>
