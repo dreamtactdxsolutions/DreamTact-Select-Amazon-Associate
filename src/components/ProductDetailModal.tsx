@@ -73,6 +73,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <ShoppingCart size={18} />
                 Amazonで詳細＆最新価格をチェック
               </a>
+
+              {product.relatedArticle && (
+                <a className="btn-outline btn-detail-cta" href={`./articles/${product.relatedArticle.slug}/`}>
+                  記事を読む：{product.relatedArticle.title}
+                </a>
+              )}
             </div>
           </div>
 

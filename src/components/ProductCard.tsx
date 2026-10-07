@@ -101,9 +101,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className="btn-outline btn-full" 
             onClick={() => onSelectProduct(product)}
           >
-            詳細レビュー・口コミ
+            詳細を見る
             <ChevronRight size={16} />
           </button>
+
+          {product.relatedArticle && (
+            <a className="btn-outline btn-full" href={`./articles/${product.relatedArticle.slug}/`}>
+              比較記事を読む
+              <ChevronRight size={16} />
+            </a>
+          )}
           
           <a 
             href={affiliateUrl} 
