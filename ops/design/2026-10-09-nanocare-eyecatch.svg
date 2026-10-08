@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">ナノケア 前モデル EH-NA0K vs 新型 EH-NB70 違いを比較</title>
+  <desc id="desc">DreamTact Select の記事アイキャッチ。濃紺の背景に、左に前モデル EH-NA0K（ゴールド）、右に新型 EH-NB70（青）の型番を置き、中央にVSのマーク。下に「違いを比較」と「予約して待つか、今買うか」。左上に白地のPRラベル。商品写真やロゴは使っていない。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1d"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3cf55"/>
+      <stop offset="0.5" stop-color="#d4af37"/>
+      <stop offset="1" stop-color="#b8860b"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- 装飾：風の流れを思わせる薄い曲線（商品を描かない抽象図形） -->
+  <g fill="none" stroke="#d4af37" stroke-opacity="0.08" stroke-width="2" stroke-linecap="round">
+    <path d="M -20 420 C 240 360, 420 470, 640 410 S 1020 330, 1220 380"/>
+    <path d="M -20 450 C 260 395, 440 500, 660 440 S 1040 360, 1220 410"/>
+    <path d="M -20 480 C 280 430, 460 530, 680 470 S 1060 390, 1220 440"/>
+  </g>
+  <g fill="none" stroke="#d4af37" stroke-opacity="0.07" stroke-width="2">
+    <circle cx="600" cy="267" r="190"/>
+    <circle cx="600" cy="267" r="250"/>
+  </g>
+  <!-- 上下のゴールドライン -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#gold)"/>
+  <rect x="0" y="624" width="1200" height="6" fill="url(#gold)"/>
+
+  <!-- PR表記（左上・主要文字の範囲 1040×480 の内側。白地に濃紺の太字40px） -->
+  <g>
+    <rect x="84" y="76" width="112" height="58" rx="10" fill="#f3f4f6"/>
+    <text x="140" y="119" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="900" fill="#0a0f1d" letter-spacing="2">PR</text>
+  </g>
+
+  <!-- 記事タイプ（右上） -->
+  <text x="1116" y="116" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="28" font-weight="500" fill="#9ca3af">パナソニック ナノケア</text>
+
+  <!-- 左カード：前モデル EH-NA0K（ゴールド） -->
+  <g>
+    <rect x="80" y="152" width="420" height="230" rx="20" fill="#111827" stroke="#d4af37" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="80" y="152" width="420" height="8" rx="4" fill="url(#gold)"/>
+    <text x="290" y="222" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="36" font-weight="700" fill="#9ca3af">前モデル</text>
+    <text x="290" y="318" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="68" font-weight="800" fill="url(#gold)" letter-spacing="1">EH-NA0K</text>
+  </g>
+
+  <!-- 右カード：新型 EH-NB70（青） -->
+  <g>
+    <rect x="700" y="152" width="420" height="230" rx="20" fill="#111827" stroke="#3b82f6" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="700" y="152" width="420" height="8" rx="4" fill="url(#blue)"/>
+    <text x="910" y="222" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="36" font-weight="700" fill="#9ca3af">新型</text>
+    <text x="910" y="318" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="68" font-weight="800" fill="url(#blue)" letter-spacing="1">EH-NB70</text>
+  </g>
+
+  <!-- VS -->
+  <g>
+    <circle cx="600" cy="267" r="62" fill="#0a0f1d" stroke="url(#gold)" stroke-width="4"/>
+    <text x="600" y="288" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="56" font-weight="800" fill="#f3f4f6">VS</text>
+  </g>
+
+  <!-- メインコピー -->
+  <text x="600" y="472" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="80" font-weight="900" fill="#f3f4f6">違いを<tspan fill="url(#gold)">比較</tspan></text>
+
+  <!-- サブコピー -->
+  <text x="600" y="532" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="500" fill="#9ca3af">予約して待つか、今買うか</text>
+
+  <!-- サイト名 -->
+  <text x="1116" y="592" text-anchor="end" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#d4af37" letter-spacing="1">DreamTact Select</text>
+</svg>

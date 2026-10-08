@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { products, getPriceRanges } from './data/products';
+import { products, getPriceRanges, CATEGORY_LABELS } from './data/products';
 import type { Product } from './data/products';
 import { Header } from './components/Header';
 import { AssociateConfig } from './components/AssociateConfig';
@@ -86,14 +86,8 @@ function App() {
     return true;
   });
 
-  // ランキング順に並び替え (カテゴリ内ランク順)
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    // カテゴリがallの場合は価格や評価などで並べるか、モックデータの順序
-    if (selectedCategory === 'all') {
-      return b.rating - a.rating; // overallは評価順
-    }
-    return a.rank - b.rank; // カテゴリ内はランク順
-  });
+  // 並び順は掲載データの順（人気順ではない）
+  const sortedProducts = filteredProducts;
 
   return (
     <>
@@ -125,7 +119,7 @@ function App() {
               </h1>
               <p className="hero-subtitle">
                 家電・ガジェット・美容家電・日用品・本まで、スペックと価格を比べて「どれを選ぶか」を整理しています。<br />
-                価格や評価は確認した日付つきで掲載しています。
+                価格は確認した日付つきで掲載しています。
               </p>
               <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
               
@@ -142,7 +136,7 @@ function App() {
                     setActiveSection('rankings');
                   }}
                 >
-                  ランキングを見る
+                  商品一覧を見る
                 </button>
                 {isAdmin && (
                   <button className="btn-outline" onClick={() => setIsConfigOpen(true)}>
@@ -166,10 +160,10 @@ function App() {
                 }}
               >
                 <span className="feat-badge">ガジェット</span>
-                <h3>最新ガジェット部門</h3>
-                <p>スマートウォッチやワイヤレスイヤホンなど、生産性を高める最新デジタル機器。</p>
+                <h3>ガジェット</h3>
+                <p>Fire TV Stick・モバイルバッテリー・Kindleなど。価格は確認日つきで掲載しています。</p>
                 <span className="feat-link">
-                  ガジェット部門を見る <ArrowRight size={14} />
+                  ガジェットを見る <ArrowRight size={14} />
                 </span>
               </div>
 
@@ -182,10 +176,10 @@ function App() {
                 }}
               >
                 <span className="feat-badge">家電</span>
-                <h3>スマート家電部門</h3>
-                <p>吸引・水拭きを全自動化するロボット掃除機など、暮らしにゆとりを生むスマート家電。</p>
+                <h3>家電</h3>
+                <p>衣類乾燥除湿機や加湿器など、秋冬の家事で使う家電。</p>
                 <span className="feat-link">
-                  スマート家電部門を見る <ArrowRight size={14} />
+                  家電を見る <ArrowRight size={14} />
                 </span>
               </div>
 
@@ -198,8 +192,8 @@ function App() {
                 }}
               >
                 <span className="feat-badge">予算別</span>
-                <h3>1万〜3万円の厳選ギフト</h3>
-                <p>自分へのご褒美や、大切な人への贈り物に最も選ばれている本命の価格帯。</p>
+                <h3>1万〜3万円の商品</h3>
+                <p>予算に合わせて、確認日つきの価格で絞り込めます。</p>
                 <span className="feat-link">
                   この価格帯を見る <ArrowRight size={14} />
                 </span>
@@ -213,8 +207,9 @@ function App() {
         {activeSection === 'rankings' && (
           <div className="rankings-container container fade-in">
             <div className="section-header text-center">
-              <h1 className="gradient-gold-text">人気商品ランキング</h1>
-              <p className="subtitle">カテゴリーと価格帯を組み合わせて、最適なアイテムを見つけられます</p>
+              <h1 className="gradient-gold-text">商品一覧</h1>
+              <p className="subtitle">カテゴリーと価格帯で絞り込めます。価格は確認した日付つきで、並び順は人気順ではありません。</p>
+              <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
             </div>
 
             {/* フィルターパネル */}
@@ -225,10 +220,7 @@ function App() {
                 <div className="filter-tabs">
                   {[
                     { id: 'all', label: 'すべて' },
-                    { id: 'gadget', label: 'ガジェット' },
-                    { id: 'appliance', label: 'スマート家電' },
-                    { id: 'kitchen', label: 'キッチン用品' },
-                    { id: 'beauty', label: '美容・健康' },
+                    ...Object.entries(CATEGORY_LABELS).map(([id, label]) => ({ id, label })),
                   ].map((cat) => (
                     <button
                       key={cat.id}
@@ -273,7 +265,6 @@ function App() {
                     product={product}
                     associateId={associateId}
                     onSelectProduct={(p) => setSelectedProduct(p)}
-                    showRank={selectedCategory !== 'all'} // カテゴリ絞り込み時のみ順位を表示
                   />
                 ))}
               </div>
@@ -303,12 +294,7 @@ function App() {
               <div className="filter-group">
                 <span className="filter-label">比較するカテゴリー:</span>
                 <div className="filter-tabs">
-                  {[
-                    { id: 'gadget', label: 'ガジェット' },
-                    { id: 'appliance', label: 'スマート家電' },
-                    { id: 'kitchen', label: 'キッチン用品' },
-                    { id: 'beauty', label: '美容・健康' },
-                  ].map((cat) => (
+                  {Object.entries(CATEGORY_LABELS).map(([id, label]) => ({ id, label })).map((cat) => (
                     <button
                       key={cat.id}
                       className={`filter-tab ${selectedCategory === cat.id || (selectedCategory === 'all' && cat.id === 'gadget') ? 'active' : ''}`}

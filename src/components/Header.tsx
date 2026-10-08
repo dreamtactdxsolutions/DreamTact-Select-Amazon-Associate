@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({
             className={`nav-link ${activeSection === 'rankings' ? 'active' : ''}`}
             onClick={() => setActiveSection('rankings')}
           >
-            ランキング
+            商品一覧
           </button>
           <button
             className={`nav-link ${activeSection === 'compare' ? 'active' : ''}`}

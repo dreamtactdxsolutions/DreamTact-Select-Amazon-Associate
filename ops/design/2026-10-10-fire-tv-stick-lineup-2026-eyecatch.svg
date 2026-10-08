@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Fire TV Stick 4機種の違い HD・4K Select・4K・4K Plus を比べる</title>
+  <desc id="desc">DreamTact Select の記事アイキャッチ。濃紺の背景に、横長のスティック形の抽象的な枠線を4つ同じ大きさで並べ、HD、4K Select、4K、4K Plus の文字ラベルを添えた。下に「Fire TV Stick 4機種の違い」と「HD・4K Select・4K・4K Plus を比べる」、2026年10月8日時点の日付。左上に白地のPRラベル。商品写真、ロゴ、価格は使っていない。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1d"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3cf55"/>
+      <stop offset="0.5" stop-color="#d4af37"/>
+      <stop offset="1" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g fill="none" stroke="#d4af37" stroke-opacity="0.07" stroke-width="2">
+    <circle cx="600" cy="255" r="190"/>
+    <circle cx="600" cy="255" r="250"/>
+    <circle cx="600" cy="255" r="310"/>
+  </g>
+  <rect x="0" y="0" width="1200" height="6" fill="url(#gold)"/>
+  <rect x="0" y="624" width="1200" height="6" fill="url(#gold)"/>
+
+  <!-- PR -->
+  <g>
+    <rect x="84" y="76" width="112" height="58" rx="10" fill="#f3f4f6"/>
+    <text x="140" y="119" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="900" fill="#0a0f1d" letter-spacing="2">PR</text>
+  </g>
+  <text x="1116" y="116" text-anchor="end" font-family="'Noto Sans JP', sans-serif" font-size="28" font-weight="500" fill="#9ca3af">ストリーミング端末 スペック比較</text>
+
+  <g>
+    <rect x="84" y="156" width="240" height="196" rx="20" fill="#111827" stroke="#d4af37" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="84" y="156" width="240" height="8" rx="4" fill="url(#gold)"/>
+    <!-- 抽象スティック枠 -->
+    <rect x="124" y="204" width="130" height="52" rx="12" fill="#d4af37" fill-opacity="0.12" stroke="#d4af37" stroke-width="4"/>
+    <rect x="254" y="219" width="30" height="22" rx="4" fill="none" stroke="#d4af37" stroke-width="4"/>
+    <line x1="148" y1="230" x2="226" y2="230" stroke="#d4af37" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round"/>
+    <text x="204" y="320" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="36" font-weight="800" fill="#f3f4f6">HD</text>
+  </g>
+  <g>
+    <rect x="348" y="156" width="240" height="196" rx="20" fill="#111827" stroke="#d4af37" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="348" y="156" width="240" height="8" rx="4" fill="url(#gold)"/>
+    <!-- 抽象スティック枠 -->
+    <rect x="388" y="204" width="130" height="52" rx="12" fill="#d4af37" fill-opacity="0.12" stroke="#d4af37" stroke-width="4"/>
+    <rect x="518" y="219" width="30" height="22" rx="4" fill="none" stroke="#d4af37" stroke-width="4"/>
+    <line x1="412" y1="230" x2="490" y2="230" stroke="#d4af37" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round"/>
+    <text x="468" y="320" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="36" font-weight="800" fill="#f3f4f6">4K Select</text>
+  </g>
+  <g>
+    <rect x="612" y="156" width="240" height="196" rx="20" fill="#111827" stroke="#d4af37" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="612" y="156" width="240" height="8" rx="4" fill="url(#gold)"/>
+    <!-- 抽象スティック枠 -->
+    <rect x="652" y="204" width="130" height="52" rx="12" fill="#d4af37" fill-opacity="0.12" stroke="#d4af37" stroke-width="4"/>
+    <rect x="782" y="219" width="30" height="22" rx="4" fill="none" stroke="#d4af37" stroke-width="4"/>
+    <line x1="676" y1="230" x2="754" y2="230" stroke="#d4af37" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round"/>
+    <text x="732" y="320" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="36" font-weight="800" fill="#f3f4f6">4K</text>
+  </g>
+  <g>
+    <rect x="876" y="156" width="240" height="196" rx="20" fill="#111827" stroke="#d4af37" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="876" y="156" width="240" height="8" rx="4" fill="url(#gold)"/>
+    <!-- 抽象スティック枠 -->
+    <rect x="916" y="204" width="130" height="52" rx="12" fill="#d4af37" fill-opacity="0.12" stroke="#d4af37" stroke-width="4"/>
+    <rect x="1046" y="219" width="30" height="22" rx="4" fill="none" stroke="#d4af37" stroke-width="4"/>
+    <line x1="940" y1="230" x2="1018" y2="230" stroke="#d4af37" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round"/>
+    <text x="996" y="320" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="36" font-weight="800" fill="#f3f4f6">4K Plus</text>
+  </g>
+
+  <!-- メインコピー -->
+  <text x="600" y="446" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="64" font-weight="900" fill="#f3f4f6">Fire TV Stick 4機種の違い</text>
+  <!-- サブコピー -->
+  <text x="600" y="512" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="500" fill="#9ca3af">HD・4K Select・4K・4K Plus を比べる</text>
+  <!-- 日付 -->
+  <text x="84" y="592" text-anchor="start" font-family="'Noto Sans JP', sans-serif" font-size="28" font-weight="400" fill="#9ca3af">2026年10月8日時点</text>
+  <text x="1116" y="592" text-anchor="end" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#d4af37" letter-spacing="1">DreamTact Select</text>
+</svg>
