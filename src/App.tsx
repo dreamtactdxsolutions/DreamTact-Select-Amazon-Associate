@@ -119,7 +119,7 @@ function App() {
               </h1>
               <p className="hero-subtitle">
                 家電・ガジェット・美容家電・日用品・本まで、スペックと価格を比べて「どれを選ぶか」を整理しています。<br />
-                価格や評価は確認した日付つきで掲載しています。
+                価格は確認した日付つきで掲載しています。
               </p>
               <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
               
@@ -209,6 +209,7 @@ function App() {
             <div className="section-header text-center">
               <h1 className="gradient-gold-text">商品一覧</h1>
               <p className="subtitle">カテゴリーと価格帯で絞り込めます。価格は確認した日付つきで、並び順は人気順ではありません。</p>
+              <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
             </div>
 
             {/* フィルターパネル */}

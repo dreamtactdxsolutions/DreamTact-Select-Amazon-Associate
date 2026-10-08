@@ -21,7 +21,8 @@ export const CompareTable: React.FC<CompareTableProps> = ({
     <div className="compare-section fade-in">
       <div className="compare-header text-center">
         <h2 className="gradient-gold-text">スペック＆価格 比較表</h2>
-        <p className="subtitle">同ジャンルでの性能差や価格を並べて比較できます</p>
+        <p className="subtitle">同じカテゴリーの商品の価格と、確認できた範囲の仕様を並べています。並び順は人気順ではありません。</p>
+        <p className="table-pr-note">本ページはプロモーション（広告）を含みます。</p>
       </div>
 
       <div className="table-responsive-wrapper glass-panel">
@@ -53,6 +54,17 @@ export const CompareTable: React.FC<CompareTableProps> = ({
               ))}
             </tr>
             <tr>
+              <td className="sticky-col label-td">販売元・価格の注意</td>
+              {products.map((product) => (
+                <td key={product.id} className="desc-td">
+                  {product.seller && <p className="table-desc">販売元：{product.seller}</p>}
+                  {product.notes?.map((n) => (
+                    <p className="table-desc" key={n}>※{n}</p>
+                  ))}
+                </td>
+              ))}
+            </tr>
+            <tr>
               <td className="sticky-col label-td">特徴</td>
               {products.map((product) => (
                 <td key={product.id} className="desc-td">
@@ -61,12 +73,12 @@ export const CompareTable: React.FC<CompareTableProps> = ({
               ))}
             </tr>
             {/* 主要なスペック項目を統合して表示 */}
-            {Object.keys(products[0].specs).map((specKey) => (
+            {Array.from(new Set(products.flatMap((p) => Object.keys(p.specs)))).map((specKey) => (
               <tr key={specKey}>
                 <td className="sticky-col label-td">{specKey}</td>
                 {products.map((product) => (
                   <td key={product.id} className="spec-td">
-                    {product.specs[specKey] || '-'}
+                    {product.specs[specKey] || '未確認'}
                   </td>
                 ))}
               </tr>
@@ -104,6 +116,10 @@ export const CompareTable: React.FC<CompareTableProps> = ({
       </div>
 
       <style>{`
+        .table-pr-note {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+        }
         .table-date {
           color: var(--text-muted);
           font-size: 0.7rem;
