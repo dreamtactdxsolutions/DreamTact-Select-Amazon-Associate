@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Check, AlertTriangle, Star, ShoppingCart } from 'lucide-react';
+import { X, Check, AlertTriangle, ShoppingCart } from 'lucide-react';
 import { getAffiliateLink } from '../data/products';
 import type { Product } from '../data/products';
 
@@ -44,21 +44,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="detail-basic-info">
               <p className="detail-tagline">{product.tagline}</p>
               
-              <div className="detail-rating-row">
-                <div className="stars-wrapper">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      fill={i < Math.floor(product.rating) ? 'var(--accent-primary)' : 'none'}
-                      color={i < Math.floor(product.rating) ? 'var(--accent-primary)' : 'var(--text-muted)'}
-                    />
-                  ))}
-                </div>
-                <span className="rating-val">{product.rating.toFixed(1)}</span>
-                <span className="reviews-cnt">({product.reviewsCount}件のユーザー評価)</span>
-              </div>
-
               <div className="detail-price-box">
                 <span className="price-label">Amazon 税込参考価格:</span>
                 <span className="price-value">￥{product.price.toLocaleString()}</span>

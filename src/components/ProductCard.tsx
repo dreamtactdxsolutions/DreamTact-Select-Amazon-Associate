@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ChevronRight, ShoppingCart, Award } from 'lucide-react';
+import { ChevronRight, ShoppingCart, Award } from 'lucide-react';
 import { getAffiliateLink } from '../data/products';
 import type { Product } from '../data/products';
 
@@ -59,21 +59,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="product-info">
-        <div className="rating-row">
-          <div className="stars-wrapper">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={14}
-                fill={i < Math.floor(product.rating) ? 'var(--accent-primary)' : 'none'}
-                color={i < Math.floor(product.rating) ? 'var(--accent-primary)' : 'var(--text-muted)'}
-              />
-            ))}
-            <span className="rating-val">{product.rating.toFixed(1)}</span>
-          </div>
-          <span className="reviews-cnt">({product.reviewsCount}件の評価)</span>
-        </div>
-
         <h3 className="product-title">{product.name}</h3>
         <p className="product-tagline">{product.tagline}</p>
 

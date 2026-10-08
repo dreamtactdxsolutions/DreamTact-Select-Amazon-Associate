@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { getAffiliateLink } from '../data/products';
 import type { Product } from '../data/products';
 
@@ -48,18 +48,6 @@ export const CompareTable: React.FC<CompareTableProps> = ({
               {products.map((product) => (
                 <td key={product.id} className="price-td">
                   ￥{product.price.toLocaleString()}
-                </td>
-              ))}
-            </tr>
-            <tr>
-              <td className="sticky-col label-td">評価</td>
-              {products.map((product) => (
-                <td key={product.id}>
-                  <div className="table-rating">
-                    <Star size={14} fill="var(--accent-primary)" color="var(--accent-primary)" />
-                    <span className="rate-num">{product.rating.toFixed(1)}</span>
-                    <span className="reviews-cnt">({product.reviewsCount}件)</span>
-                  </div>
                 </td>
               ))}
             </tr>
