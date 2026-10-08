@@ -72,3 +72,8 @@ Paperwhiteのページ（18:53）の比較表と一致。
 - Kindle Paperwhite シグニチャー エディション：174.7 x 126.8 x 6.8 mm、**229g**（同じ注記つき）
 - Paperwhite（204g）よりサイズは同じで25g重い（Amazonの表示。理由は未確認、推測しない）
 - これで4機種の測定値がそろった：Kindle 140g／Kindle 32GB 162g／Paperwhite 204g／シグニチャー 229g
+
+## 追記：比較表の解像度（指揮役がPDFの文字層を再確認、2026/10/08）
+- 無印Kindleページ（18:57）の比較表の「解像度」行：Kindle＝300 ppi（表示中の列）、Kindle 32GB＝300ppi、Kindle Paperwhite＝300ppi、シグニチャー＝300ppi（「7インチ反射抑…」の列）。4列とも300ppiの表示
+- Paperwhiteページ（18:53）の比較表も同様に4列で300ppi
+- 記事では「商品ページの比較表の表示」と出典を添える
