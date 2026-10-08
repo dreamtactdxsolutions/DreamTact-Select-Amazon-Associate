@@ -21,7 +21,7 @@
 
 ## Amazonアソシエイト
 - トラッキングID（ストアID）: dreamtactaffi-22（2026-10-07 アソシエイト・セントラルで確認）
-- アソシエイト・セントラルに登録済みのサイト・SNS: 未設定
+- アソシエイト・セントラルに登録済みのサイト・SNS: https://select.dream-tact-dx-solutions.com ／ https://dream-tact-dx-solutions.com ／ https://x.com/dreamtactselect（2026-10-08 オーナーのスクリーンショットで確認）
 
 ## アクセス解析
 - GA4 測定ID: 未設定
