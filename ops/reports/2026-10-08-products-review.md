@@ -1,4 +1,4 @@
-status: fixes-applied（2026-10-08 指揮役が必須5件・任意4件を指定どおり反映。再審査待ち）
+status: approved
 
 # 公開前審査：商品データ（src/data/products.ts 13商品）と表示文言
 
@@ -148,3 +148,37 @@ CompareTable は価格と確認日だけを表示し、`notes` と `seller` を�
 - 並び順は掲載データの順で、「人気順ではない」と明記している。ランキングバッジのCSS（.rank-badge など）は残っているが、使われておらず表示されない
 - 関連記事のリンク先4件（prime-sale-2026-price-check、room-drying-guide、magnifica-s-vs-start、nanocare-nb70-vs-na0k）は、すべて content/articles/ に status: published で存在する
 - 「実機レビュー」「使ってみた」「要確認」は、公開表示の文言に残っていない
+
+---
+
+## 再審査（2026-10-08）
+
+- 審査者：compliance（Web検索・WebFetchは使っていない。一次情報は ops/research/ の同じファイル）
+- 対象：src/data/products.ts、src/App.tsx、src/components/CompareTable.tsx（ほかのファイルは前回から変更なしの前提）
+
+### 判定：approved
+
+### 必須5件の反映（すべて指定どおり）
+1. 広告表記：App.tsx 212行目（商品一覧の section-header）と CompareTable.tsx 25行目（compare-header）に「本ページはプロモーション（広告）を含みます。」を追加済み。`.table-pr-note` のスタイルも CompareTable.tsx 119〜122行目に追加済み。比較表の subtitle も「性能差」を外した指定の文言になっている
+2. App.tsx 122行目：「価格は確認した日付つきで掲載しています。」に修正済み
+3. CompareTable.tsx：価格行の直後に「販売元・価格の注意」行（56〜66行目）を追加済み。仕様の行は全商品のキーを統合（76行目）し、空欄は「未確認」（81行目）
+4. EH-NB70 の description（products.ts 249行目）：指定どおり。質量の条件（「ノズル含まず」／「セットノズル含まず」）は ops/research/2026-10-08-nanocare-panasonic-spec.md 13・23行目と一致
+5. 二重価格・あおり表現：Anker の notes（75行目）・description（83行目）・cons（85行目）、EH-NA0K の tagline（215行目）・description（228行目）・cons（230行目）、アタックZERO の cons（272行目）、Fire TV Stick の description（63行目）すべて指定どおり。「翌日配送」は ops/research/2026-10-08-nanocare-eh-nb70-amazon.md 34行目の表示と一致
+
+### 任意4件の反映（すべて指定どおり）
+- ECAM22080GB の cons（207行目）、Fire TV Stick の specs「種類」削除（60〜62行目）、象印の notes（135行目。一次情報 prime-sale-candidates 27・31行目と一致）、オキシクリーンの description（288行目）
+
+### 新しい問題の確認
+- 必須の指摘なし。価格・ASIN・販売元・仕様の数値は今回の修正で変わっていない。「おすすめ」「すぐ届く」「通常価格ではありません」「性能差」は表示文言に残っていない
+- 比較表のキー統合により、ガジェットの比較表では Fire TV Stick・Kindle の「PSE」「容量」「出力」などが「未確認」と表示される。事実としては正しく（一次情報に記載がない）、法令上の問題はないため承認の妨げにはしない
+
+### 任意（次回の更新時でよい）
+- アタックZERO の notes（products.ts 264行目）：一次情報（prime-sale-candidates 77行目）に「他の出品者ではより安い価格があります」の表示があるので、象印とそろえて追記すると望ましい
+  - 置き換え前：`notes: ['確認時点で「-7%」、過去価格 2,559円の表示。「3点買うと5% OFF」の表示あり'],`
+  - 置き換え後：`notes: ['確認時点で「-7%」、過去価格 2,559円のAmazonの表示。「3点買うと5% OFF」「他の出品者ではより安い価格があります」の表示あり'],`
+- EH-NA0K の notes（220行目）：ほかの商品にそろえて「参考価格 39,000円のAmazonの表示」にすると表記が統一される
+- 比較表の「未確認」セルが多いカテゴリー（ガジェット）は、Kindle・Fire TV の「PSE」のように、そもそもその商品に関係の薄い項目も「未確認」と出る。気になる場合は、カテゴリーごとに表示する仕様項目を決める運用をオーナーが検討する
+- 前回の審査記録7行目の「2026-10-08 付け6ファイル」は、実際には 2026-10-08 付け5ファイル＋ 2026-10-07-magnifica-s-amazon.md の6ファイル（記録上の表記のみの誤り）
+
+### 公開について
+- この審査は商品データと表示文言のコードに対するもので、ops/content/approved/ に移すファイルはない。サイトへの反映（main へのマージ）はオーナーの最終確認後に行う
