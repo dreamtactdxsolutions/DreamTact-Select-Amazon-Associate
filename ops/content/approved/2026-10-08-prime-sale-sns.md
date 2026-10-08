@@ -1,9 +1,9 @@
 # SNS投稿文：【プライム感謝祭2026】セール前に価格をメモしておきたい10品
 
-- 対象記事：content/articles/prime-sale-2026-price-check.md（status: draft、compliance 審査待ち）
+- 対象記事：content/articles/prime-sale-2026-price-check.md（status: published。compliance 最終審査 approved 2026-10-08、オーナーが公開を承認 2026-10-08、記事の公開日 2026-10-09）
 - 記事URL：https://select.dream-tact-dx-solutions.com/articles/prime-sale-2026-price-check/
 - 作成：creator（2026-10-08）
-- status: draft（compliance の審査待ち。投稿・予約はオーナーの承認後）
+- status: approved（compliance 2026-10-08。X・Threads／Instagram の文面と、日付指定の投稿案①〜③すべて合格。投稿・予約はオーナーの承認後に、ops/config.md のアフィリエイト用ブランドでのみ行う）
 
 <!--
 - Amazonリンクは貼らず、自サイトの記事URLだけを使う
@@ -67,7 +67,7 @@ https://select.dream-tact-dx-solutions.com/articles/prime-sale-2026-price-check/
 - アカウント：@dreamtactselect（X）
 - 記事URL：https://select.dream-tact-dx-solutions.com/articles/prime-sale-2026-price-check/
 - 作成：creator（2026-10-08）
-- status: compliance審査待ち（投稿・予約はしていない。compliance の合格とオーナーの承認後に、ops/config.md のアフィリエイト用ブランドでのみ扱う）
+- status: compliance 合格（2026-10-08、下の審査結果を参照）。オーナーの承認待ち（投稿・予約はしていない。compliance の合格とオーナーの承認後に、ops/config.md のアフィリエイト用ブランドでのみ扱う）
 - 根拠：content/articles/prime-sale-2026-price-check.md と ops/research/2026-10-08-prime-sale-candidates-amazon.md のみ（Web検索・WebFetchは不使用）
 
 <!--
@@ -98,3 +98,39 @@ https://select.dream-tact-dx-solutions.com/articles/prime-sale-2026-price-check/
 https://select.dream-tact-dx-solutions.com/articles/prime-sale-2026-price-check/
 
 <!-- 文字数の目安：全角換算 約131（URL 12換算込み） -->
+
+### 審査結果（日付指定の投稿案）
+
+- 審査: compliance（2026-10-08）。照合元は content/articles/prime-sale-2026-price-check.md（published）と ops/research/2026-10-08-prime-sale-candidates-amazon.md のみ（Web検索・WebFetchは不使用）
+- 判定: **①②③すべて合格**（文面の修正なし。投稿・予約はオーナーの承認後。Metricool は ops/config.md のアフィリエイト用ブランドが設定済みの場合のみ使い、既存ブランドには触れない）
+
+#### ステマ規制
+- 3本とも本文の先頭に「#PR」があり、続きを開く前に広告だとわかる。記事はアフィリエイトリンクを含むため、自サイトURLだけの投稿でもPR表記は必要で、置き方は適切
+
+#### Amazonアソシエイト規約
+- Amazonのリンク・短縮URLなし。自サイトの記事URLだけ。価格・割引率の数字なし（日付の添え忘れが起きない）。Amazonのロゴ・画像なし。「Amazon」「プライム感謝祭」はセール名・サイト名として事実を書いているだけで、公式の告知に見える使い方ではない
+
+#### 事実の照合
+- 本セール日程「10/16（金）〜19（月）」：research 6行目・記事64行目と一致。曜日も正しい（2026-10-16は金曜、10-19は月曜）
+- ①「あと4日です」：10/12投稿→10/16開始で4日。正しい
+- ②「明日10/16（金）から」：10/15投稿で正しい
+- ③「本日10/16（金）〜」：開始時刻を書いておらず、「もう始まっている」とは言っていないため朝の投稿で問題なし
+- 「10/8時点で記録」：research 3行目・記事66行目と一致
+- 「10品」「予約受付中の新モデル2品は別枠」：記事65行目「10品のうち2品は予約受付中の新モデルで、別枠で紹介します」と一致（⑤⑦）
+- 「セール前から割引表示が出ていた商品もありました」：記事のFAQ（297行目）と3節（270〜274行目）にある③-7%、⑥-33%、⑧-7%と一致
+- 「割引率の表示だけで判断せず…金額が下がっているか」：記事259・274行目と同じ趣旨。⑥Ankerの10/8価格がすでにタイムセール価格である点は記事側で4か所説明しており、②の「セール前から割引表示が出ていた商品も」で注意も添えているため、SNSでの省略は可
+- 「販売元・送料・エントリー条件」：記事276〜289・308行目と一致
+- 「必要のないものは、セールでも買わなくて大丈夫です」：既存の合格済みThreads文と同じ文
+
+#### 価格予想・実機表現・煽り
+- 「安くなる」「最安」「今すぐ」「お見逃しなく」等の表現なし。①②に「価格予想なし」と明記。③は見比べ方の案内だけで予想をしていない
+- 実機使用の表現なし。①に「実機は未使用」と明記。②③は使用感に触れていないため追記は不要
+
+#### 文字数（X：全角・記号2、半角1、URL 23、改行1で計算。上限280）
+- ①：本文 221＋改行 1＋URL 23＝**245**（全角換算 約123）
+- ②：本文 227＋改行 1＋URL 23＝**251**（全角換算 約126。creator のメモ「約120」は少なめだったが、上限内なので修正不要）
+- ③：本文 239＋改行 1＋URL 23＝**263**（全角換算 約132）
+
+#### 注意（修正不要）
+- 記事の日程や「10品／別枠2品」の書き方を変えた場合は、①〜③も照合し直す
+- 実際の投稿日が予定（10/12・10/15・10/16）からずれる場合、「あと4日」「明日」「本日」が事実と合わなくなる。投稿日を変えるときは compliance の再審査が必要
