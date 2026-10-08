@@ -1,60 +1,28 @@
 import React from 'react';
-import { ChevronRight, ShoppingCart, Award } from 'lucide-react';
-import { getAffiliateLink } from '../data/products';
+import { ChevronRight, ShoppingCart } from 'lucide-react';
+import { getAffiliateLink, formatCheckedDate, CATEGORY_LABELS } from '../data/products';
+import { ProductVisual } from './ProductVisual';
 import type { Product } from '../data/products';
 
 interface ProductCardProps {
   product: Product;
   associateId: string;
   onSelectProduct: (product: Product) => void;
-  showRank?: boolean;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   associateId,
   onSelectProduct,
-  showRank = true,
 }) => {
   const affiliateUrl = getAffiliateLink(product.asin, associateId);
-
-  // ランキングバッジのスタイル
-  const getRankBadge = (rank: number) => {
-    if (!showRank) return null;
-    let badgeClass = 'rank-normal';
-    let iconColor = 'var(--text-secondary)';
-    
-    if (rank === 1) {
-      badgeClass = 'rank-gold';
-      iconColor = '#d4af37';
-    } else if (rank === 2) {
-      badgeClass = 'rank-silver';
-      iconColor = '#a8a8a8';
-    } else if (rank === 3) {
-      badgeClass = 'rank-bronze';
-      iconColor = '#cd7f32';
-    }
-
-    return (
-      <div className={`rank-badge ${badgeClass}`}>
-        <Award size={14} style={{ color: iconColor }} />
-        <span>第 {rank} 位</span>
-      </div>
-    );
-  };
 
   return (
     <div className="product-card glass-panel fade-in">
       <div className="product-image-container">
-        {getRankBadge(product.rank)}
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="product-img" 
-          loading="lazy" 
-        />
+        <ProductVisual category={product.category} />
         <div className="category-tag">
-          <span className="badge badge-blue">{product.categoryLabel}</span>
+          <span className="badge badge-blue">{CATEGORY_LABELS[product.category]}</span>
         </div>
       </div>
 
@@ -63,12 +31,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <p className="product-tagline">{product.tagline}</p>
 
         <div className="price-row">
-          <span className="price-label">税込参考価格:</span>
+          <span className="price-label">Amazon価格（税込）:</span>
           <span className="price-value">
             <span className="currency">￥</span>
             {product.price.toLocaleString()}
           </span>
         </div>
+        <p className="price-date">{formatCheckedDate(product.checkedAt)}時点{product.seller ? `・販売元：${product.seller}` : ''}</p>
+        {product.notes?.map((n) => (
+          <p className="price-note" key={n}>※{n}</p>
+        ))}
 
         {/* 主なスペック (最初の3つを表示) */}
         <div className="specs-preview">
@@ -244,6 +216,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        .price-date {
+          color: var(--text-muted);
+          font-size: 0.75rem;
+          margin: -6px 0 6px;
+        }
+
+        .price-note {
+          color: var(--accent-primary);
+          font-size: 0.75rem;
+          line-height: 1.5;
+          margin: 0 0 8px;
         }
 
         .price-row {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Check, AlertTriangle, ShoppingCart } from 'lucide-react';
-import { getAffiliateLink } from '../data/products';
+import { getAffiliateLink, formatCheckedDate, CATEGORY_LABELS } from '../data/products';
+import { ProductVisual } from './ProductVisual';
 import type { Product } from '../data/products';
 
 interface ProductDetailModalProps {
@@ -25,7 +26,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         {/* モーダルヘッダー */}
         <div className="modal-header">
           <div>
-            <span className="badge badge-blue">{product.categoryLabel} 第{product.rank}位</span>
+            <span className="badge badge-blue">{CATEGORY_LABELS[product.category]}</span>
             <h2 className="modal-title">{product.name}</h2>
           </div>
           <button className="close-btn" onClick={onClose} aria-label="閉じる">
@@ -38,16 +39,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           {/* 画像 & 基本スペックカード */}
           <div className="detail-hero-grid">
             <div className="detail-img-wrapper">
-              <img src={product.image} alt={product.name} className="detail-img" />
+              <ProductVisual category={product.category} size="detail" />
             </div>
             
             <div className="detail-basic-info">
               <p className="detail-tagline">{product.tagline}</p>
               
               <div className="detail-price-box">
-                <span className="price-label">Amazon 税込参考価格:</span>
+                <span className="price-label">Amazon価格（税込・{formatCheckedDate(product.checkedAt)}時点）:</span>
                 <span className="price-value">￥{product.price.toLocaleString()}</span>
               </div>
+              {product.seller && <p className="detail-seller">出荷元・販売元：{product.seller}</p>}
+              {product.notes?.map((n) => (
+                <p className="detail-note" key={n}>※{n}</p>
+              ))}
+              <p className="detail-seller">価格・在庫は変わります。購入前に商品ページで最新の情報を確認してください。</p>
 
               <a 
                 href={affiliateUrl} 
@@ -78,7 +84,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="pros-box">
               <h4 className="pros-title">
                 <Check size={18} className="icon-success" />
-                おすすめポイント（メリット）
+                向いている人
               </h4>
               <ul className="pros-list">
                 {product.pros.map((pro, index) => (
@@ -90,7 +96,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="cons-box">
               <h4 className="cons-title">
                 <AlertTriangle size={18} className="icon-warning" />
-                購入前に知っておくべき点（デメリット）
+                確認しておきたい点
               </h4>
               <ul className="cons-list">
                 {product.cons.map((con, index) => (
@@ -102,7 +108,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
           {/* スペック詳細 */}
           <div className="detail-section">
-            <h3 className="section-title">スペック詳細情報</h3>
+            <h3 className="section-title">仕様（確認できた範囲）</h3>
             <div className="detail-specs-table">
               {Object.entries(product.specs).map(([key, val]) => (
                 <div className="specs-row" key={key}>
@@ -132,6 +138,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       </div>
 
       <style>{`
+        .detail-seller {
+          color: var(--text-muted);
+          font-size: 0.8rem;
+          margin: 6px 0;
+        }
+        .detail-note {
+          color: var(--accent-primary);
+          font-size: 0.8rem;
+          margin: 4px 0;
+        }
         .modal-overlay {
           position: fixed;
           top: 0;

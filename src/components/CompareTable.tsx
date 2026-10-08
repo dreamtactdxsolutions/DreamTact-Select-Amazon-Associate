@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingCart } from 'lucide-react';
-import { getAffiliateLink } from '../data/products';
+import { getAffiliateLink, formatCheckedDate } from '../data/products';
+import { ProductVisual } from './ProductVisual';
 import type { Product } from '../data/products';
 
 interface CompareTableProps {
@@ -34,8 +35,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({
               {products.map((product) => (
                 <th key={product.id} className="product-th">
                   <div className="th-product-info">
-                    <img src={product.image} alt={product.name} className="table-img" />
-                    <span className="table-rank">Rank #{product.rank}</span>
+                    <ProductVisual category={product.category} size="table" />
                     <span className="table-product-name">{product.name}</span>
                   </div>
                 </th>
@@ -44,15 +44,16 @@ export const CompareTable: React.FC<CompareTableProps> = ({
           </thead>
           <tbody>
             <tr>
-              <td className="sticky-col label-td">参考価格</td>
+              <td className="sticky-col label-td">Amazon価格（税込）</td>
               {products.map((product) => (
                 <td key={product.id} className="price-td">
                   ￥{product.price.toLocaleString()}
+                  <div className="table-date">{formatCheckedDate(product.checkedAt)}時点</div>
                 </td>
               ))}
             </tr>
             <tr>
-              <td className="sticky-col label-td">特徴・強み</td>
+              <td className="sticky-col label-td">特徴</td>
               {products.map((product) => (
                 <td key={product.id} className="desc-td">
                   <p className="table-desc">{product.tagline}</p>
@@ -103,6 +104,12 @@ export const CompareTable: React.FC<CompareTableProps> = ({
       </div>
 
       <style>{`
+        .table-date {
+          color: var(--text-muted);
+          font-size: 0.7rem;
+          font-weight: 400;
+          margin-top: 2px;
+        }
         .compare-section {
           margin-top: 30px;
           display: flex;
