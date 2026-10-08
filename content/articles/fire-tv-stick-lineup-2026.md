@@ -2,10 +2,10 @@
 title: Fire TV Stick 4機種の違い早見（HD／4K Select／4K／4K Plus）｜2026年10月版 スペック比較
 description: Fire TV Stick HD・4K Select・【New】4K・4K Plusの4機種を、2026年10月8日時点のAmazonの表示で比較。価格、先行セールの予告表示、ページに記載のある特長と、購入前に確認したい点を整理しました。
 slug: fire-tv-stick-lineup-2026
-published: 2026-10-10
+published: 2026-10-08
 updated:
 eyecatch: images/articles/fire-tv-stick-lineup-2026.png
-status: draft
+status: published
 ---
 
 <!--
@@ -82,7 +82,7 @@ status: draft
 
 ※価格・先行セールの表示・在庫は2026年10月8日時点のAmazonの表示で、変わることがあります。購入前に商品ページで最新の情報を確認してください。
 ※HD・4K Select・4K Plusの価格は、各ページの「本体のみ」の選択肢の税込表示です。【New】4Kは、選択肢の記載を確認できていません。サウンドバーとのセットなど他の選択肢は比較に含めていません。
-※「記載を確認できていません」は、オーナーが確認した資料に記載がなかったという意味で、機能がないという意味ではありません。
+※「記載を確認できていません」は、運営者が確認した資料に記載がなかったという意味で、機能がないという意味ではありません。
 ※4K Plusの特長は4K Plusのページの記載です。他の3機種に同じ機能があるかどうかを示すものではありません。
 
 ## 4Kと4K Plusは「同一の製品」？ ページの記載について
