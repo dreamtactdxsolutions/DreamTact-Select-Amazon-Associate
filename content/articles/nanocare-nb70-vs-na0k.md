@@ -5,7 +5,7 @@ slug: nanocare-nb70-vs-na0k
 published: 2026-10-10
 updated:
 eyecatch: images/articles/nanocare-nb70-vs-na0k.png
-status: draft
+status: published
 ---
 
 <!--
@@ -98,7 +98,7 @@ status: draft
 任意（公開ページには出ないため合否に影響しない）：
 - 編集メモ13行目「一次情報は…のみ」が古い。公式の仕様表（ops/research/2026-10-08-nanocare-panasonic-spec.md）を追記しておくと後の更新で混乱しない
 SNS文（ops/content/drafts/2026-10-09-nanocare-sns.md）との整合：事実の食い違いはなし（SNSの「NA0Kは商品説明に3種類」はAmazonの記載として正しく、記事の「本体内蔵の速乾ノズル＋3種類」と矛盾しない）。ただし比べ方の説明が「Amazon商品ページの掲載情報」だけになっているため、任意の修正案をSNS側の審査結果に記載した
-最終審査：approved（2026-10-08。compliance 指定の置き換え1件を反映。一次情報に ops/research/2026-10-08-nanocare-panasonic-spec.md（パナソニック公式の仕様表）を追加。指揮役）
+最終審査：approved（2026-10-08。オーナーが公開を承認。compliance 指定の置き換え1件を反映。一次情報に ops/research/2026-10-08-nanocare-panasonic-spec.md（パナソニック公式の仕様表）を追加。指揮役）
 -->
 
 **すぐに手元に届くことや、速乾ノズル（本体内蔵）に加えてナイトキャップノズル・セットノズル・根元速乾ノズルが付属すること、価格を重視するなら前モデルのEH-NA0K、11月1日の発売まで待てて、メーカーが「ナノケア史上最もコンパクト」（EH-NA0Kとの体積比較。条件は下の「違い3」）と表記している新型を選びたいならEH-NB70が候補です。**
