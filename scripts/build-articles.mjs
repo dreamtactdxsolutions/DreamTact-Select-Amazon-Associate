@@ -55,7 +55,9 @@ const findProblems = (a) => {
   for (const [, v] of text.matchAll(/\{\{ASIN:([^}]*)\}\}/g)) {
     if (!/^[A-Z0-9]{10}$/.test(v)) problems.push(`ASINが不正: ${v}`);
   }
-  if (/【実機レビュー】|使ってみた/.test(text)) problems.push('実際に使ったと読める表現（【実機レビュー】／使ってみた）がある');
+  // 運営者が実際に買って使った記事だけ、フロントマターに hands_on: owner を書けば体験の表現を使える
+  if (a.meta.hands_on && a.meta.hands_on !== 'owner') problems.push('hands_on は owner だけ指定できる');
+  if (a.meta.hands_on !== 'owner' && /【実機レビュー】|使ってみた/.test(text)) problems.push('実際に使ったと読める表現（【実機レビュー】／使ってみた）がある（運営者の実体験の記事は hands_on: owner を付ける）');
   return problems;
 };
 
@@ -324,7 +326,7 @@ const main = () => {
       },
       main: `<main><div class="wrap">
 ${a.isDraft ? '<p class="draft-note">これは下書きのプレビューです（検索エンジンには表示されません）</p>\n' : ''}<p class="pr-note">${PR_DISCLOSURE}</p>
-<h1>${escapeHtml(a.meta.title)}</h1>
+${a.meta.hands_on === 'owner' ? '<p class="pr-note">この記事は、運営者が実際に購入して使った体験をもとに書いています。</p>\n' : ''}<h1>${escapeHtml(a.meta.title)}</h1>
 <p class="dates">${dates}</p>
 ${shareBar(a.meta.title, canonical, 'top')}
 ${eyecatch ? `<img class="eyecatch" src="${rel}${escapeHtml(eyecatch)}" alt="${escapeHtml(a.meta.title)}" width="1200" height="630" />\n` : ''}<article class="article">
