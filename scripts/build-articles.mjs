@@ -209,6 +209,7 @@ main{padding:32px 0 64px}
 h1{font-size:28px;line-height:1.5;margin-bottom:12px}
 .dates{color:var(--text2);font-size:14px;margin-bottom:24px}
 .eyecatch{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:28px;display:block}
+.article img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block;margin:16px 0}
 .article h2{font-size:22px;margin:48px 0 16px;padding:4px 0 4px 12px;border-left:4px solid var(--gold);line-height:1.5}
 .article h3{font-size:18px;margin:32px 0 12px;line-height:1.5}
 .article p{margin:0 0 18px}
