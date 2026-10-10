@@ -55,7 +55,16 @@ const findProblems = (a) => {
   for (const [, v] of text.matchAll(/\{\{ASIN:([^}]*)\}\}/g)) {
     if (!/^[A-Z0-9]{10}$/.test(v)) problems.push(`ASINが不正: ${v}`);
   }
-  if (/【実機レビュー】|使ってみた/.test(text)) problems.push('実際に使ったと読める表現（【実機レビュー】／使ってみた）がある');
+  // 運営者が実際に買って使った記事だけ、フロントマターに hands_on: owner を書けば体験の表現を使える
+  if (a.meta.hands_on && a.meta.hands_on !== 'owner') problems.push('hands_on は owner だけ指定できる');
+  // 実体験の記事は、根拠（一次情報ファイル）・自費購入・購入日・運営者の確認日がそろわないと公開できない
+  if (a.meta.hands_on === 'owner') {
+    if (a.meta.purchase !== 'self') problems.push('hands_on: owner には purchase: self（自費購入）が必要。提供品・モニター品はこの印を使えない');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(a.meta.purchased_at || '')) problems.push('hands_on: owner には purchased_at（購入日 YYYY-MM-DD）が必要');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(a.meta.owner_confirmed || '')) problems.push('hands_on: owner には owner_confirmed（運営者が内容を確認した日 YYYY-MM-DD）が必要');
+    if (!a.meta.source || !existsSync(join(root, a.meta.source))) problems.push('hands_on: owner には source（運営者の一次情報ファイルのパス。ops/research/…）が必要で、ファイルが存在すること');
+  }
+  if (a.meta.hands_on !== 'owner' && /【実機レビュー】|使ってみた/.test(text)) problems.push('実際に使ったと読める表現（【実機レビュー】／使ってみた）がある（運営者の実体験の記事は hands_on: owner を付ける）');
   return problems;
 };
 
@@ -200,6 +209,7 @@ main{padding:32px 0 64px}
 h1{font-size:28px;line-height:1.5;margin-bottom:12px}
 .dates{color:var(--text2);font-size:14px;margin-bottom:24px}
 .eyecatch{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:28px;display:block}
+.article img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block;margin:16px 0}
 .article h2{font-size:22px;margin:48px 0 16px;padding:4px 0 4px 12px;border-left:4px solid var(--gold);line-height:1.5}
 .article h3{font-size:18px;margin:32px 0 12px;line-height:1.5}
 .article p{margin:0 0 18px}
@@ -324,7 +334,7 @@ const main = () => {
       },
       main: `<main><div class="wrap">
 ${a.isDraft ? '<p class="draft-note">これは下書きのプレビューです（検索エンジンには表示されません）</p>\n' : ''}<p class="pr-note">${PR_DISCLOSURE}</p>
-<h1>${escapeHtml(a.meta.title)}</h1>
+${a.meta.hands_on === 'owner' ? '<p class="pr-note">この記事は、運営者が自費で購入して使った体験をもとに書いています。</p>\n' : ''}<h1>${escapeHtml(a.meta.title)}</h1>
 <p class="dates">${dates}</p>
 ${shareBar(a.meta.title, canonical, 'top')}
 ${eyecatch ? `<img class="eyecatch" src="${rel}${escapeHtml(eyecatch)}" alt="${escapeHtml(a.meta.title)}" width="1200" height="630" />\n` : ''}<article class="article">
