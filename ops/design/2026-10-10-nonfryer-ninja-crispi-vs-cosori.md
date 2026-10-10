@@ -42,3 +42,10 @@ status: draft
 2. 画像に「実機レビュー」「使ってみた」の語は無し。サブの「（使用）」は Ninja のみ
 3. PNGのフォント: この環境に Noto Sans JP が無く、PNGは代替の日本語ゴシック（WenQuanYi Zen Hei）で描画した。SVGは Noto Sans JP 指定。メイン見出しは cairosvg の tspan 不具合を避けるため3つの text に分けて配置。Noto Sans JP のある環境で書き出し直すと他のアイキャッチと字形がそろう
 4. 記事は `status: draft` のまま。designerは記事を変更していない
+
+## 審査結果
+
+- 【compliance 2026-10-10】合格（status: draft のまま）
+- ロゴ・価格・割引・健康表現なし。PR表記あり、スマホで読める文字サイズ
+- 「使用」はNinjaのみ。COSORIは「商品ページの記載」「スペック比較」で、使用したと誤解させない
+- 任意: Noto Sans JP 環境での書き出し直し（字形統一）。公開をブロックしない
