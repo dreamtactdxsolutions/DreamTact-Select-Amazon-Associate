@@ -2,10 +2,10 @@
 title: ノンフライヤー比較｜Ninja Crispiを自費で買った私と、COSORI 4.7L・6Lのスペック比較
 slug: nonfryer-ninja-crispi-vs-cosori
 description: 運営者が自費で買って使っているNinja Crispiの体験と、使っていないCOSORI 4.7L・6Lの商品ページの記載を並べて整理しました。容量・サイズ・手入れ・価格の4つの軸と、2026年10月10日時点のAmazon表示価格、向く人・向かない人をまとめています。
-published: 2026-10-10
+published: 2026-10-12
 updated:
 eyecatch: images/articles/nonfryer-ninja-crispi-vs-cosori.png
-status: draft
+status: published
 hands_on: owner
 purchase: self
 purchased_at: 2026-08-14
