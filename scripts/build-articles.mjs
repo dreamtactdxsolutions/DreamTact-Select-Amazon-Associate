@@ -21,7 +21,7 @@ const SITE_NAME = 'DreamTact Select';
 const PR_DISCLOSURE = '本ページはプロモーション（広告）を含みます。';
 const ASSOCIATE_STATEMENT = `Amazonのアソシエイトとして、${SITE_NAME}は適格販売により収入を得ています。`;
 const trackingId = process.env.AMAZON_TRACKING_ID || 'dreamtactaffi-22';
-const gaId = process.env.VITE_GA_MEASUREMENT_ID || '';
+const gaId = process.env.VITE_GA_MEASUREMENT_ID || 'G-HH6VTRG414';
 const includeDrafts = process.env.ARTICLES_INCLUDE_DRAFTS === '1';
 
 const escapeHtml = (s) =>
