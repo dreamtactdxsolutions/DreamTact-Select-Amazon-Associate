@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">Fire TV Stick 4機種の違い HD・4K Select・4K・4K Plus を比べる</title>
-  <desc id="desc">DreamTact Select の記事アイキャッチ。濃紺の背景に、横長のスティック形の抽象的な枠線を4つ同じ大きさで並べ、HD、4K Select、4K、4K Plus の文字ラベルを添えた。下に「Fire TV Stick 4機種の違い」と「HD・4K Select・4K・4K Plus を比べる」、2026年10月8日時点の日付。左上に白地のPRラベル。商品写真、ロゴ、価格は使っていない。</desc>
+  <desc id="desc">DreamTact Select の記事アイキャッチ。濃紺の背景に、横長のスティック形の抽象的な枠線を4つ同じ大きさで並べ、HD、4K Select、4K、4K Plus の文字ラベルを添えた。下に「Fire TV Stick 4機種の違い」と「HD・4K Select・4K・4K Plus を比べる」。左上に白地のPRラベル。商品写真、ロゴ、価格は使っていない。</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0a0f1d"/>
@@ -70,7 +70,5 @@
   <text x="600" y="446" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="64" font-weight="900" fill="#f3f4f6">Fire TV Stick 4機種の違い</text>
   <!-- サブコピー -->
   <text x="600" y="512" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="40" font-weight="500" fill="#9ca3af">HD・4K Select・4K・4K Plus を比べる</text>
-  <!-- 日付 -->
-  <text x="84" y="592" text-anchor="start" font-family="'Noto Sans JP', sans-serif" font-size="28" font-weight="400" fill="#9ca3af">2026年10月8日時点</text>
-  <text x="1116" y="592" text-anchor="end" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#d4af37" letter-spacing="1">DreamTact Select</text>
+  <text x="600" y="592" text-anchor="middle" font-family="'Outfit', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#d4af37" letter-spacing="1">DreamTact Select</text>
 </svg>
