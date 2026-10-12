@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+const measurementId = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || 'G-HH6VTRG414';
 let enabled = false;
 
 export const initAnalytics = () => {
