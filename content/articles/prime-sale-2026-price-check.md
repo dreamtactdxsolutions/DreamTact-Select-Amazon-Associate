@@ -58,6 +58,7 @@ status: published
    置き換え後：①〜⑩の商品ページに共通：
 最終審査：approved（2026-10-08。compliance 指定の置き換え5件を反映。指揮役）
 オーナーが公開を承認（2026-10-08）
+body rewritten 2026-10-12, pending compliance re-check
 -->
 
 
