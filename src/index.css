@@ -7,8 +7,8 @@
   --text-primary: #3b2a1e;     /* dark brown ink */
   --text-secondary: #5a4636;   /* body secondary */
   --text-muted: #735e4b;       /* notes, dates (AA on cream) */
-  --accent-primary: #2f5d3a;   /* forest green: brand, links, headings */
-  --accent-primary-hover: #234a2d;
+  --accent-primary: #1f4a2c;   /* forest green: brand, links, headings */
+  --accent-primary-hover: #163a22;
   --accent-secondary: #9c3d1a; /* auburn: CTA, small accents */
   --accent-secondary-hover: #823014;
   --accent-meadow: #8aa856;    /* decoration only, not for text */
@@ -16,12 +16,12 @@
   --accent-success: #3f7a45;
   --border-color: #dccfae;
   --ink-rgb: 59, 42, 30;
-  --accent-rgb: 47, 93, 58;
+  --accent-rgb: 31, 74, 44;
   --auburn-rgb: 156, 61, 26;
   --shadow-sm: 0 1px 2px 0 rgba(59, 42, 30, 0.06);
   --shadow-md: 0 4px 10px -2px rgba(59, 42, 30, 0.10), 0 2px 4px -1px rgba(59, 42, 30, 0.06);
   --shadow-lg: 0 12px 24px -6px rgba(59, 42, 30, 0.14), 0 4px 8px -2px rgba(59, 42, 30, 0.06);
-  --shadow-gold: 0 6px 16px 0 rgba(47, 93, 58, 0.12);
+  --shadow-gold: 0 6px 16px 0 rgba(31, 74, 44, 0.12);
   --radius: 16px;
 
   /* Fonts: serif for headings, sans for body */

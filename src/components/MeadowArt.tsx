@@ -28,7 +28,7 @@ export const MeadowArt: React.FC<{ className?: string }> = ({ className }) => (
     {/* 切妻屋根の家 */}
     <g stroke="#3b2a1e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M200 198v-62h156v62z" fill="#fffdf7" />
-      <path d="M186 140 278 78l92 62z" fill="#2f5d3a" />
+      <path d="M186 140 278 78l92 62z" fill="#1f4a2c" />
       <path d="M278 78v-14" />
       <circle cx="278" cy="112" r="9" fill="#fbf6e9" />
       <rect x="226" y="154" width="26" height="22" rx="2" fill="#fbf6e9" />
@@ -44,7 +44,7 @@ export const MeadowArt: React.FC<{ className?: string }> = ({ className }) => (
       <circle cx="404" cy="216" r="2.6" />
       <circle cx="42" cy="206" r="2.6" />
     </g>
-    <g stroke="#2f5d3a" strokeWidth="1.6" strokeLinecap="round">
+    <g stroke="#1f4a2c" strokeWidth="1.6" strokeLinecap="round">
       <path d="M150 213v8M166 218v7M388 211v9M404 218v7M42 209v8" />
     </g>
   </svg>

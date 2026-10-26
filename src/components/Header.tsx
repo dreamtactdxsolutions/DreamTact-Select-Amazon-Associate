@@ -4,10 +4,10 @@ import { ShieldCheck, Settings, Flame, Sparkles } from 'lucide-react';
 // 切妻屋根の小さな線画（ロゴ用）。外部画像は使わない
 const GableIcon: React.FC<{ size?: number }> = ({ size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-    <path d="M3 16 16 5l13 11" stroke="#2f5d3a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M7 14v12h18V14" stroke="#2f5d3a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M13 26v-6a3 3 0 0 1 6 0v6" stroke="#9c3d1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M16 11v1" stroke="#9c3d1a" strokeWidth="2" strokeLinecap="round" />
+    <path d="M3 16 16 5l13 11" stroke="#fbf6e9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M7 14v12h18V14" stroke="#fbf6e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M13 26v-6a3 3 0 0 1 6 0v6" stroke="#f0b08f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M16 11v1" stroke="#f0b08f" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
@@ -121,18 +121,18 @@ export const Header: React.FC<HeaderProps> = ({
           z-index: 100;
           padding: 14px 0;
           transition: var(--transition-smooth);
-          border-bottom: 1px solid var(--border-color);
-          background: rgba(251, 246, 233, 0.96);
+          border-bottom: 1px solid #163a22;
+          background: rgba(31, 74, 44, 0.97);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
         }
 
         .header.scrolled {
           padding: 12px 0;
-          background: rgba(251, 246, 233, 0.94);
+          background: rgba(22, 58, 34, 0.97);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 1px solid #163a22;
           box-shadow: var(--shadow-md);
         }
 
@@ -153,8 +153,8 @@ export const Header: React.FC<HeaderProps> = ({
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(var(--accent-rgb), 0.1);
-          border: 1px solid rgba(var(--accent-rgb), 0.2);
+          background: rgba(251, 246, 233, 0.12);
+          border: 1px solid rgba(251, 246, 233, 0.3);
           border-radius: 10px;
           padding: 6px;
           transition: var(--transition-smooth);
@@ -180,14 +180,14 @@ export const Header: React.FC<HeaderProps> = ({
           font-size: 1.3rem;
           font-weight: 700;
           letter-spacing: 0.5px;
-          color: var(--accent-primary);
+          color: #fbf6e9;
         }
 
         .brand-sub {
           font-family: var(--font-sans);
           font-size: 0.75rem;
           font-weight: 600;
-          color: var(--text-secondary);
+          color: #d9e8a6;
           letter-spacing: 2px;
           text-transform: uppercase;
           margin-top: 2px;
@@ -197,8 +197,8 @@ export const Header: React.FC<HeaderProps> = ({
           display: flex;
           align-items: center;
           gap: 8px;
-          background: rgba(var(--ink-rgb), 0.048);
-          border: 1px solid rgba(var(--ink-rgb), 0.08);
+          background: rgba(251, 246, 233, 0.1);
+          border: 1px solid rgba(251, 246, 233, 0.22);
           padding: 4px;
           border-radius: 30px;
         }
@@ -206,7 +206,7 @@ export const Header: React.FC<HeaderProps> = ({
         .nav-link {
           background: transparent;
           border: none;
-          color: var(--text-secondary);
+          color: #eef2dc;
           font-weight: 500;
           font-size: 0.9rem;
           padding: 8px 18px;
@@ -219,12 +219,12 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         .nav-link:hover {
-          color: var(--text-primary);
+          color: #ffffff;
         }
 
         .nav-link.active {
-          background: var(--bg-tertiary);
-          color: var(--accent-primary);
+          background: #fbf6e9;
+          color: #1f4a2c;
           box-shadow: var(--shadow-sm);
         }
 
@@ -233,7 +233,7 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         .icon-sparkle-menu {
-          color: var(--accent-primary);
+          color: #d9e8a6;
         }
 
         .header-actions {
