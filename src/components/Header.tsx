@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Award, ShieldCheck, Settings, Flame, Sparkles } from 'lucide-react';
+import { ShieldCheck, Settings, Flame, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   currentId: string;
@@ -34,9 +34,6 @@ export const Header: React.FC<HeaderProps> = ({
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container container">
         <div className="logo" onClick={() => setActiveSection('home')}>
-          <div className="logo-icon">
-            <Award className="icon-gold" size={28} />
-          </div>
           <div className="logo-text">
             <span className="brand-name">DreamTact</span>
             <span className="brand-sub">Select</span>
@@ -109,18 +106,20 @@ export const Header: React.FC<HeaderProps> = ({
           left: 0;
           width: 100%;
           z-index: 100;
-          padding: 20px 0;
+          padding: 14px 0;
           transition: var(--transition-smooth);
-          border-bottom: 1px solid transparent;
-          background: transparent;
+          border-bottom: 1px solid #163a22;
+          background: rgba(31, 74, 44, 0.97);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
 
         .header.scrolled {
           padding: 12px 0;
-          background: rgba(10, 15, 29, 0.85);
+          background: rgba(22, 58, 34, 0.97);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 1px solid #163a22;
           box-shadow: var(--shadow-md);
         }
 
@@ -141,16 +140,16 @@ export const Header: React.FC<HeaderProps> = ({
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(212, 175, 55, 0.1);
-          border: 1px solid rgba(212, 175, 55, 0.2);
+          background: rgba(251, 246, 233, 0.12);
+          border: 1px solid rgba(251, 246, 233, 0.3);
           border-radius: 10px;
           padding: 6px;
           transition: var(--transition-smooth);
         }
 
         .logo:hover .logo-icon {
-          transform: rotate(15deg) scale(1.05);
-          background: rgba(212, 175, 55, 0.2);
+          transform: scale(1.05);
+          background: rgba(var(--accent-rgb), 0.2);
         }
 
         .icon-gold {
@@ -164,20 +163,18 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         .brand-name {
-          font-family: 'Outfit', sans-serif;
+          font-family: var(--font-serif);
           font-size: 1.3rem;
-          font-weight: 800;
+          font-weight: 700;
           letter-spacing: 0.5px;
-          background: linear-gradient(135deg, #ffffff 0%, var(--accent-primary) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: #fbf6e9;
         }
 
         .brand-sub {
-          font-family: 'Outfit', sans-serif;
+          font-family: var(--font-sans);
           font-size: 0.75rem;
           font-weight: 600;
-          color: var(--text-secondary);
+          color: #d9e8a6;
           letter-spacing: 2px;
           text-transform: uppercase;
           margin-top: 2px;
@@ -187,8 +184,8 @@ export const Header: React.FC<HeaderProps> = ({
           display: flex;
           align-items: center;
           gap: 8px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(251, 246, 233, 0.1);
+          border: 1px solid rgba(251, 246, 233, 0.22);
           padding: 4px;
           border-radius: 30px;
         }
@@ -196,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
         .nav-link {
           background: transparent;
           border: none;
-          color: var(--text-secondary);
+          color: #eef2dc;
           font-weight: 500;
           font-size: 0.9rem;
           padding: 8px 18px;
@@ -209,12 +206,12 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         .nav-link:hover {
-          color: var(--text-primary);
+          color: #ffffff;
         }
 
         .nav-link.active {
-          background: var(--bg-tertiary);
-          color: var(--accent-primary);
+          background: #fbf6e9;
+          color: #1f4a2c;
           box-shadow: var(--shadow-sm);
         }
 
@@ -223,7 +220,7 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         .icon-sparkle-menu {
-          color: var(--accent-primary);
+          color: #d9e8a6;
         }
 
         .header-actions {
@@ -235,7 +232,7 @@ export const Header: React.FC<HeaderProps> = ({
           display: flex;
           align-items: center;
           gap: 8px;
-          background: rgba(255, 255, 255, 0.04);
+          background: rgba(var(--ink-rgb), 0.064);
           border: 1px solid var(--border-color);
           padding: 4px 6px 4px 12px;
           border-radius: 30px;
@@ -244,7 +241,7 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         .id-badge-container:hover {
-          background: rgba(255, 255, 255, 0.08);
+          background: rgba(var(--ink-rgb), 0.128);
           border-color: var(--text-muted);
         }
 
@@ -258,8 +255,8 @@ export const Header: React.FC<HeaderProps> = ({
           display: flex;
           align-items: center;
           gap: 4px;
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.2);
+          background: rgba(var(--accent-rgb), 0.1);
+          border: 1px solid rgba(var(--accent-rgb), 0.2);
           padding: 2px 8px;
           border-radius: 20px;
         }
@@ -294,9 +291,27 @@ export const Header: React.FC<HeaderProps> = ({
         }
 
         @media (max-width: 900px) {
-          .nav-links {
-            display: none; /* スマホやタブレットではメニューは後で折りたたむか非表示 */
+          .header-container {
+            flex-wrap: wrap;
+            row-gap: 8px;
           }
+          .nav-links {
+            order: 3;
+            width: 100%;
+            overflow-x: auto;
+            gap: 2px;
+            border-radius: 999px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          .nav-links::-webkit-scrollbar { display: none; }
+          .nav-link {
+            white-space: nowrap;
+            padding: 8px 14px;
+            min-height: 40px;
+            font-size: 0.85rem;
+          }
+          .header.scrolled { padding: 8px 0; }
         }
       `}</style>
     </header>

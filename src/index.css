@@ -1,28 +1,35 @@
 /* CSS Reset & Design System Tokens */
 :root {
-  /* Colors */
-  --bg-primary: #0a0f1d;
-  --bg-secondary: #111827;
-  --bg-tertiary: #1f2937;
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --accent-primary: #d4af37; /* Gold */
-  --accent-primary-hover: #f3cf55;
-  --accent-secondary: #3b82f6; /* Blue */
-  --accent-secondary-hover: #60a5fa;
-  --accent-success: #10b981; /* Green */
-  --border-color: #374151;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-gold: 0 4px 14px 0 rgba(212, 175, 55, 0.3);
-  
-  /* Fonts */
-  --font-sans: 'Outfit', 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-  
+  /* Green Gables palette: cream paper, forest green, Anne's auburn hair */
+  --bg-primary: #fbf6e9;       /* cream page */
+  --bg-secondary: #fffdf7;     /* card surface */
+  --bg-tertiary: #f1e9d2;      /* parchment, label background */
+  --text-primary: #3b2a1e;     /* dark brown ink */
+  --text-secondary: #5a4636;   /* body secondary */
+  --text-muted: #735e4b;       /* notes, dates (AA on cream) */
+  --accent-primary: #1f4a2c;   /* forest green: brand, links, headings */
+  --accent-primary-hover: #163a22;
+  --accent-secondary: #9c3d1a; /* auburn: CTA, small accents */
+  --accent-secondary-hover: #823014;
+  --accent-meadow: #8aa856;    /* decoration only, not for text */
+  --accent-meadow-soft: #e6eed2;
+  --accent-success: #3f7a45;
+  --border-color: #dccfae;
+  --ink-rgb: 59, 42, 30;
+  --accent-rgb: 31, 74, 44;
+  --auburn-rgb: 156, 61, 26;
+  --shadow-sm: 0 1px 2px 0 rgba(59, 42, 30, 0.06);
+  --shadow-md: 0 4px 10px -2px rgba(59, 42, 30, 0.10), 0 2px 4px -1px rgba(59, 42, 30, 0.06);
+  --shadow-lg: 0 12px 24px -6px rgba(59, 42, 30, 0.14), 0 4px 8px -2px rgba(59, 42, 30, 0.06);
+  --shadow-gold: 0 6px 16px 0 rgba(31, 74, 44, 0.12);
+  --radius: 16px;
+
+  /* Fonts: serif for headings, sans for body */
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Noto Serif CJK JP', serif;
+  --font-sans: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, -apple-system, BlinkMacSystemFont, sans-serif;
+
   /* Transitions */
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.25s ease;
   --transition-fast: all 0.15s ease-in-out;
 }
 
@@ -37,7 +44,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -72,17 +79,18 @@ a {
 
 /* Typography & Headings */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.35;
 }
 
 /* Micro-animations */
 @keyframes pulse-gold {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.3);
   }
   50% {
-    box-shadow: 0 0 15px 4px rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 15px 4px rgba(var(--accent-rgb), 0.4);
   }
 }
 
@@ -97,47 +105,43 @@ h1, h2, h3, h4, h5, h6 {
 
 /* CSS Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent-primary);
 }
 
 .gradient-gold-text {
-  background: linear-gradient(135deg, #f3cf55 0%, var(--accent-primary) 50%, #b8860b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent-primary);
 }
 
 .glass-panel {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
 
-/* Amazon Button style with high-end premium feeling */
+/* Primary call-to-action: auburn, text only (no Amazon colors or logos) */
 .btn-amazon {
-  background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%);
-  color: #000000 !important;
+  background: var(--accent-secondary);
+  color: #ffffff !important;
   font-weight: 700;
   padding: 12px 24px;
-  border-radius: 30px;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(var(--auburn-rgb), 0.28);
   transition: var(--transition-smooth);
   font-size: 0.95rem;
+  min-height: 44px;
 }
 
 .btn-amazon:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 153, 0, 0.5);
-  background: linear-gradient(135deg, #ffb340 0%, #ff9900 100%);
+  transform: translateY(-1px);
+  background: var(--accent-secondary-hover);
+  box-shadow: 0 6px 16px rgba(var(--auburn-rgb), 0.35);
 }
 
 .btn-amazon:active {
@@ -145,22 +149,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-outline {
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--accent-primary);
   background: transparent;
-  color: var(--text-primary);
+  color: var(--accent-primary);
   padding: 10px 20px;
-  border-radius: 30px;
-  font-weight: 600;
+  border-radius: 999px;
+  font-weight: 700;
   cursor: pointer;
   transition: var(--transition-smooth);
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-height: 44px;
+  font-family: inherit;
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--text-secondary);
+  background: var(--accent-meadow-soft);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(var(--auburn-rgb), 0.55);
+  outline-offset: 2px;
 }
 
 /* Badge tags */
@@ -174,15 +185,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-gold {
-  background: rgba(212, 175, 55, 0.15);
+  background: var(--accent-meadow-soft);
   color: var(--accent-primary);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
 }
 
 .badge-blue {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(var(--auburn-rgb), 0.08);
   color: var(--accent-secondary);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(var(--auburn-rgb), 0.25);
 }
 
 /* Custom layout classes */
@@ -209,3 +220,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none; }
+}
+
+/* ページ全体を深緑の枠で囲む（画面端に固定、レイアウトはずらさない） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  border: 12px solid #1f4a2c;
+  pointer-events: none;
+  z-index: 9999;
+}
+@media (max-width: 600px) {
+  body::before { border-width: 7px; }
+}

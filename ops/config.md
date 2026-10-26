@@ -12,7 +12,10 @@
 
 ## SNS（Metricool）
 - アフィリエイト用ブランド名: 未設定
-- 対象アカウント: X @dreamtactselect（表示名「DreamTact Select｜セール・買い物ガイド」、2026-10-08 作成）。Instagram・Threads は未作成
+- 対象アカウント: X @dreamtactselect（表示名「DreamTact Select｜セール・買い物ガイド」、2026-10-08 作成）。Threads は未作成
+- Instagram（アフィリエイト用）: `dream_tact_select`（表示名「DreamTactSelect」。2026-10-17 オーナーのスクリーンショットで確認。投稿は手動）
+- **Instagram の別アカウント `dream_tact`（ビジネスコンサル・本業用）は触らない。** 投稿・案内の下書きには「投稿前に、画面上部のアカウント名が `dream_tact_select` になっているか確認」と書く（2026-10-17 に `dream_tact` へ誤投稿があり、オーナーが削除済み）
+- Amazonアソシエイトの「サイト・SNS」に Instagram は未登録。Amazonのリンクを直接貼る前に登録が必要（自サイトの記事へのリンクだけなら不要）
 - Metricool のアフィリエイト用ブランドは未作成のため、X への投稿はオーナーが手動で行う
 
 **未設定のあいだは、Metricoolへの予約・投稿・分析の取得を一切行わない。**
@@ -24,4 +27,4 @@
 - アソシエイト・セントラルに登録済みのサイト・SNS: https://select.dream-tact-dx-solutions.com ／ https://dream-tact-dx-solutions.com ／ https://x.com/dreamtactselect（2026-10-08 オーナーのスクリーンショットで確認）
 
 ## アクセス解析
-- GA4 測定ID: 未設定
+- GA4 測定ID: G-HH6VTRG414（2026-10-13 サイトに組み込み済み。`scripts/build-articles.mjs` と `src/analytics.ts` の既定値）

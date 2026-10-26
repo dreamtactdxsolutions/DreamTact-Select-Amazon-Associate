@@ -85,7 +85,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         .product-card {
           display: flex;
           flex-direction: column;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           overflow: hidden;
           transition: var(--transition-smooth);
           height: 100%;
@@ -93,7 +93,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         .product-card:hover {
           transform: translateY(-6px);
-          border-color: rgba(212, 175, 55, 0.25);
+          border-color: rgba(var(--accent-rgb), 0.25);
           box-shadow: var(--shadow-lg), var(--shadow-gold);
         }
 
@@ -101,7 +101,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           position: relative;
           width: 100%;
           height: 200px;
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(var(--ink-rgb), 0.08);
           overflow: hidden;
           display: flex;
           align-items: center;
@@ -136,15 +136,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         }
 
         .rank-gold {
-          background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(184, 134, 11, 0.9) 100%);
-          color: #000;
-          border: 1px solid rgba(212, 175, 55, 0.5);
+          background: linear-gradient(135deg, #f0d27a 0%, #d9b24a 100%);
+          color: #3b2a1e;
+          border: 1px solid #c9a23c;
         }
 
         .rank-silver {
           background: linear-gradient(135deg, rgba(200, 200, 200, 0.9) 0%, rgba(150, 150, 150, 0.9) 100%);
-          color: #000;
-          border: 1px solid rgba(200, 200, 200, 0.5);
+          color: #3b2a1e;
+          border: 1px solid rgba(160, 160, 160, 0.6);
         }
 
         .rank-bronze {
@@ -154,7 +154,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         }
 
         .rank-normal {
-          background: rgba(17, 24, 39, 0.85);
+          background: rgba(255, 253, 247, 0.92);
           color: var(--text-primary);
           border: 1px solid var(--border-color);
         }
@@ -236,7 +236,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           align-items: baseline;
           gap: 6px;
           margin-bottom: 16px;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(var(--ink-rgb), 0.08);
           padding-top: 12px;
         }
 
@@ -262,7 +262,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           display: flex;
           flex-direction: column;
           gap: 6px;
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(var(--ink-rgb), 0.06);
           border: 1px solid var(--border-color);
           border-radius: 8px;
           padding: 10px 12px;

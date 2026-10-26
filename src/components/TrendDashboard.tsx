@@ -255,7 +255,7 @@ export const TrendDashboard: React.FC = () => {
           padding: 24px;
           display: flex;
           flex-direction: column;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
         }
 
         .card-header {
@@ -267,9 +267,9 @@ export const TrendDashboard: React.FC = () => {
 
         .header-icon {
           padding: 8px;
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(var(--ink-rgb), 0.048);
           border-radius: 10px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
         }
 
         .text-gold {
@@ -303,7 +303,7 @@ export const TrendDashboard: React.FC = () => {
           align-items: center;
           justify-content: space-between;
           padding: 12px 16px;
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(var(--ink-rgb), 0.06);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           transition: var(--transition-fast);
@@ -311,7 +311,7 @@ export const TrendDashboard: React.FC = () => {
 
         .keyword-item:hover {
           transform: translateX(4px);
-          border-color: rgba(212, 175, 55, 0.3);
+          border-color: rgba(var(--accent-rgb), 0.3);
         }
 
         .kw-left {
@@ -375,7 +375,7 @@ export const TrendDashboard: React.FC = () => {
           flex-direction: column;
           gap: 8px;
           padding: 12px;
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(var(--ink-rgb), 0.06);
           border: 1px solid var(--border-color);
           border-radius: 12px;
         }
@@ -397,7 +397,7 @@ export const TrendDashboard: React.FC = () => {
 
         .cat-stat-bar-container {
           height: 6px;
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
           border-radius: 3px;
           overflow: hidden;
         }
@@ -480,7 +480,7 @@ export const TrendDashboard: React.FC = () => {
           -webkit-appearance: none;
           width: 100%;
           height: 6px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(var(--ink-rgb), 0.16);
           border-radius: 3px;
           outline: none;
         }
@@ -499,7 +499,7 @@ export const TrendDashboard: React.FC = () => {
 
         .sim-slider::-webkit-slider-thumb:hover {
           transform: scale(1.2);
-          box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+          box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
         }
 
         .slider-labels {
@@ -527,7 +527,7 @@ export const TrendDashboard: React.FC = () => {
           align-items: center;
           gap: 12px;
           padding: 16px;
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(var(--ink-rgb), 0.032);
           border: 1px solid var(--border-color);
           border-radius: 12px;
         }
@@ -541,11 +541,11 @@ export const TrendDashboard: React.FC = () => {
         }
 
         .bg-eye {
-          background: rgba(59, 130, 246, 0.1);
+          background: rgba(var(--auburn-rgb), 0.1);
         }
 
         .bg-click {
-          background: rgba(212, 175, 55, 0.1);
+          background: rgba(var(--accent-rgb), 0.1);
         }
 
         .icon-blue {
@@ -577,8 +577,8 @@ export const TrendDashboard: React.FC = () => {
         }
 
         .result-total {
-          background: rgba(212, 175, 55, 0.05);
-          border: 1px dashed rgba(212, 175, 55, 0.3);
+          background: rgba(var(--accent-rgb), 0.05);
+          border: 1px dashed rgba(var(--accent-rgb), 0.3);
           border-radius: 16px;
           padding: 24px;
           display: flex;
