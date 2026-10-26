@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Settings, Flame, Sparkles } from 'lucide-react';
 
-// 切妻屋根の小さな線画（ロゴ用）。外部画像は使わない
-const GableIcon: React.FC<{ size?: number }> = ({ size = 28 }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-    <path d="M3 16 16 5l13 11" stroke="#fbf6e9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M7 14v12h18V14" stroke="#fbf6e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M13 26v-6a3 3 0 0 1 6 0v6" stroke="#f0b08f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M16 11v1" stroke="#f0b08f" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-);
-
 interface HeaderProps {
   currentId: string;
   onOpenConfig: () => void;
@@ -44,9 +34,6 @@ export const Header: React.FC<HeaderProps> = ({
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container container">
         <div className="logo" onClick={() => setActiveSection('home')}>
-          <div className="logo-icon">
-            <GableIcon size={30} />
-          </div>
           <div className="logo-text">
             <span className="brand-name">DreamTact</span>
             <span className="brand-sub">Select</span>

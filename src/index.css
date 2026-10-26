@@ -225,3 +225,16 @@ h1, h2, h3, h4, h5, h6 {
 @media (prefers-reduced-motion: reduce) {
   .fade-in { animation: none; }
 }
+
+/* ページ全体を深緑の枠で囲む（画面端に固定、レイアウトはずらさない） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  border: 12px solid #1f4a2c;
+  pointer-events: none;
+  z-index: 9999;
+}
+@media (max-width: 600px) {
+  body::before { border-width: 7px; }
+}

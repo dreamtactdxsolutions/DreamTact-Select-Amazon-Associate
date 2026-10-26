@@ -11,7 +11,6 @@ import { ArticleGenerator } from './components/ArticleGenerator';
 import { Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 import { initAnalytics, trackSectionView } from './analytics';
 import { LatestArticles } from './components/LatestArticles';
-import { MeadowArt } from './components/MeadowArt';
 
 function App() {
   // 管理者モードの判定 (localhost であるか、URLに ?admin=true があるか、localStorage に記録がある場合)
@@ -147,7 +146,6 @@ function App() {
                   )}
                 </div>
               </div>
-              <MeadowArt className="hero-art" />
             </section>
 
             {/* 新着記事 */}
@@ -408,15 +406,6 @@ function App() {
           gap: 12px;
         }
 
-        .hero-art {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          height: 100%;
-          width: 46%;
-          max-width: 540px;
-        }
-
         .hero-badge {
           display: flex;
           align-items: center;
@@ -468,12 +457,6 @@ function App() {
           .hero-subtitle {
             font-size: 0.92rem;
             line-height: 1.7;
-          }
-          .hero-art {
-            width: 100%;
-            max-width: none;
-            height: 96px;
-            opacity: 0.95;
           }
           .hero-actions .btn-amazon,
           .hero-actions .btn-outline {

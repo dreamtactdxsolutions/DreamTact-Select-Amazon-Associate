@@ -208,7 +208,7 @@ ${main}
 `;
 
 // 切妻屋根の小さな線画（ロゴ用）
-const BRAND_ICON = '<svg class="brand-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 16 16 5l13 11" stroke="#fbf6e9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14v12h18V14" stroke="#fbf6e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 26v-6a3 3 0 0 1 6 0v6" stroke="#f0b08f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const BRAND_ICON = '';
 
 const formatDate = (d) => {
   const [y, m, day] = d.split('-').map(Number);
@@ -222,6 +222,7 @@ const CSS = `
 :root{--bg:#fbf6e9;--bg2:#fffdf7;--bg3:#f1e9d2;--text:#3b2a1e;--text2:#5a4636;--muted:#735e4b;--green:#1f4a2c;--green-d:#163a22;--meadow:#e6eed2;--auburn:#9c3d1a;--auburn-d:#823014;--border:#dccfae;--serif:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho','Noto Serif CJK JP',serif;--sans:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,-apple-system,BlinkMacSystemFont,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.9;font-size:16px;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;border:12px solid #1f4a2c;pointer-events:none;z-index:9999}@media(max-width:600px){body::before{border-width:7px}}
 a{color:var(--green);text-underline-offset:3px}
 a:focus-visible,button:focus-visible{outline:3px solid rgba(156,61,26,.55);outline-offset:2px}
 .wrap{max-width:760px;margin:0 auto;padding:0 16px}
