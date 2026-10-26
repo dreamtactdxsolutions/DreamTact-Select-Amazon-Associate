@@ -39,3 +39,4 @@
 - [x] GA4計測コードの設置（測定ID未登録）
 - [x] 正式URLを https://select.dream-tact-dx-solutions.com/ に決定し、canonical設定
 - [x] 出典不明の口コミの削除
+- [x] 2026-10-26：Search Console の残り6URL（Magnifica・Prime・部屋干し・Nanocare・トップ・記事一覧）と、新デザイン（PC／スマホ）、GA4の計測をオーナーが確認。すべてOK
