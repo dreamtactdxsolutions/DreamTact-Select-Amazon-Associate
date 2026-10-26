@@ -453,13 +453,13 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
 
         .control-panel, .output-panel {
           padding: 24px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           min-height: 520px;
         }
 
         /* APIキーセクション */
         .api-key-section {
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(var(--ink-rgb), 0.08);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           padding: 16px;
@@ -494,7 +494,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
 
         .api-input {
           width: 100%;
-          background: rgba(0, 0, 0, 0.3);
+          background: rgba(var(--ink-rgb), 0.12);
           border: 1px solid var(--border-color);
           border-radius: 6px;
           padding: 8px 12px;
@@ -515,7 +515,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
           font-size: 0.7rem;
           font-weight: 700;
           color: var(--accent-success);
-          background: rgba(16, 185, 129, 0.1);
+          background: rgba(var(--accent-rgb), 0.1);
           padding: 2px 6px;
           border-radius: 4px;
         }
@@ -563,7 +563,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
         }
 
         .textarea-input {
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(var(--ink-rgb), 0.08);
           border: 1px solid var(--border-color);
           border-radius: 8px;
           padding: 12px;
@@ -577,7 +577,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
         .textarea-input:focus {
           outline: none;
           border-color: var(--accent-primary);
-          box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+          box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.15);
         }
 
         .style-options {
@@ -591,7 +591,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
           align-items: center;
           gap: 8px;
           padding: 10px;
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(var(--ink-rgb), 0.032);
           border: 1px solid var(--border-color);
           border-radius: 6px;
           font-size: 0.8rem;
@@ -601,13 +601,13 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
         }
 
         .style-radio-label:hover {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
           color: var(--text-primary);
         }
 
         .style-radio-label.active {
           border-color: var(--accent-primary);
-          background: rgba(212, 175, 55, 0.05);
+          background: rgba(var(--accent-rgb), 0.05);
           color: var(--accent-primary);
           font-weight: 600;
         }
@@ -669,8 +669,8 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
         }
 
         .demo-notice {
-          background: rgba(212, 175, 55, 0.05);
-          border: 1px solid rgba(212, 175, 55, 0.2);
+          background: rgba(var(--accent-rgb), 0.05);
+          border: 1px solid rgba(var(--accent-rgb), 0.2);
           border-radius: 8px;
           padding: 12px;
           font-size: 0.75rem;
@@ -718,12 +718,12 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
 
         .tab-btn:hover {
           color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(var(--ink-rgb), 0.048);
         }
 
         .tab-btn.active {
           color: var(--accent-primary);
-          background: rgba(212, 175, 55, 0.1);
+          background: rgba(var(--accent-rgb), 0.1);
         }
 
         .btn-copy {
@@ -737,7 +737,7 @@ Markdown形式で出力してください。見出しは「#」や「##」を適
         }
 
         .output-body {
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(var(--ink-rgb), 0.06);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           padding: 20px;

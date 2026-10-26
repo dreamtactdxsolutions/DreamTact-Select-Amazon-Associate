@@ -11,6 +11,7 @@ import { ArticleGenerator } from './components/ArticleGenerator';
 import { Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 import { initAnalytics, trackSectionView } from './analytics';
 import { LatestArticles } from './components/LatestArticles';
+import { MeadowArt } from './components/MeadowArt';
 
 function App() {
   // 管理者モードの判定 (localhost であるか、URLに ?admin=true があるか、localStorage に記録がある場合)
@@ -103,47 +104,50 @@ function App() {
         isAdmin={isAdmin}
       />
 
-      <main className="main-content" style={{ marginTop: '90px', flexGrow: 1 }}>
+      <main className="main-content" style={{ flexGrow: 1 }}>
         {/* ==================== 1. ホーム画面 ==================== */}
         {activeSection === 'home' && (
           <div className="home-container container fade-in">
-            {/* ヒーローセクション */}
-            <section className="hero-section text-center">
-              <div className="hero-badge">
-                <Sparkles size={14} className="icon-gold" />
-                <span>Amazonで買えるモノを比べて選ぶ買い物ガイド</span>
-              </div>
-              <h1 className="hero-title">
-                比べて選ぶ、<br />
-                <span className="gradient-gold-text">暮らしの買い物ガイド</span>
-              </h1>
-              <p className="hero-subtitle">
-                家電・ガジェット・美容家電・日用品・本まで、スペックと価格を比べて「どれを選ぶか」を整理しています。<br />
-                価格は確認した日付つきで掲載しています。
-              </p>
-              <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
-              
-              <div className="hero-actions">
-                <a className="btn-amazon" href="./articles/">
-                  記事を読む
-                  <ArrowRight size={16} />
-                </a>
-                <button 
-                  className="btn-outline" 
-                  onClick={() => {
-                    setSelectedCategory('all');
-                    setSelectedPrice('all');
-                    setActiveSection('rankings');
-                  }}
-                >
-                  商品一覧を見る
-                </button>
-                {isAdmin && (
-                  <button className="btn-outline" onClick={() => setIsConfigOpen(true)}>
-                    アソシエイトIDを設定
+            {/* ヒーローセクション（記事がすぐ下に見えるよう低めに） */}
+            <section className="hero-section">
+              <div className="hero-text">
+                <div className="hero-badge">
+                  <Sparkles size={14} className="icon-gold" />
+                  <span>Amazonで買えるモノを比べて選ぶ買い物ガイド</span>
+                </div>
+                <h1 className="hero-title">
+                  比べて選ぶ、<br />
+                  <span className="gradient-gold-text">暮らしの買い物ガイド</span>
+                </h1>
+                <p className="hero-subtitle">
+                  家電・ガジェット・美容家電・日用品・本まで、スペックと価格を比べて「どれを選ぶか」を整理しています。
+                  価格は確認した日付つきで掲載しています。
+                </p>
+                <p className="hero-pr-note">本ページはプロモーション（広告）を含みます。</p>
+
+                <div className="hero-actions">
+                  <a className="btn-amazon" href="./articles/">
+                    記事を読む
+                    <ArrowRight size={16} />
+                  </a>
+                  <button
+                    className="btn-outline"
+                    onClick={() => {
+                      setSelectedCategory('all');
+                      setSelectedPrice('all');
+                      setActiveSection('rankings');
+                    }}
+                  >
+                    商品一覧を見る
                   </button>
-                )}
+                  {isAdmin && (
+                    <button className="btn-outline" onClick={() => setIsConfigOpen(true)}>
+                      アソシエイトIDを設定
+                    </button>
+                  )}
+                </div>
               </div>
+              <MeadowArt className="hero-art" />
             </section>
 
             {/* 新着記事 */}
@@ -373,54 +377,102 @@ function App() {
         /* メインコンテンツへのパディング */
         .main-content {
           padding-bottom: 60px;
+          margin-top: 76px;
+        }
+        @media (max-width: 900px) {
+          .main-content { margin-top: 112px; }
         }
 
         /* ヒーローセクション */
         .hero-section {
-          padding: 60px 0 40px;
+          position: relative;
+          overflow: hidden;
+          margin-top: 20px;
+          padding: 32px 40px;
+          border-radius: 24px;
+          background: linear-gradient(180deg, #fffdf7 0%, #f6f0dc 100%);
+          border: 1px solid var(--border-color);
+          box-shadow: var(--shadow-md);
+          display: flex;
+          align-items: center;
+          min-height: 280px;
+        }
+
+        .hero-text {
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          gap: 16px;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .hero-art {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          height: 100%;
+          width: 46%;
+          max-width: 540px;
         }
 
         .hero-badge {
           display: flex;
           align-items: center;
           gap: 6px;
-          background: rgba(212, 175, 55, 0.1);
-          border: 1px solid rgba(212, 175, 55, 0.2);
-          padding: 6px 14px;
+          background: var(--accent-meadow-soft);
+          border: 1px solid rgba(var(--accent-rgb), 0.25);
+          padding: 5px 14px;
           border-radius: 20px;
           font-size: 0.8rem;
-          font-weight: 600;
+          font-weight: 700;
           color: var(--accent-primary);
         }
 
         .hero-title {
-          font-size: 2.8rem;
-          line-height: 1.25;
-          font-weight: 800;
-          letter-spacing: -0.5px;
-        }
-
-        @media (max-width: 768px) {
-          .hero-title {
-            font-size: 2rem;
-          }
+          font-size: 2.3rem;
+          line-height: 1.35;
+          font-weight: 700;
+          letter-spacing: 0.02em;
         }
 
         .hero-subtitle {
-          font-size: 1.05rem;
+          font-size: 0.98rem;
           color: var(--text-secondary);
-          max-width: 700px;
-          line-height: 1.6;
+          line-height: 1.8;
         }
 
         .hero-actions {
           display: flex;
+          flex-wrap: wrap;
           gap: 12px;
-          margin-top: 10px;
+          margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+          .hero-section {
+            padding: 22px 18px 96px;
+            margin-top: 8px;
+            border-radius: 20px;
+          }
+          .hero-title {
+            font-size: 1.65rem;
+          }
+          .hero-subtitle {
+            font-size: 0.92rem;
+            line-height: 1.7;
+          }
+          .hero-art {
+            width: 100%;
+            max-width: none;
+            height: 96px;
+            opacity: 0.95;
+          }
+          .hero-actions .btn-amazon,
+          .hero-actions .btn-outline {
+            padding: 10px 18px;
+          }
         }
 
         /* クイックリンク・特徴グリッド */
@@ -428,7 +480,7 @@ function App() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 20px;
-          margin: 40px 0;
+          margin: 8px 0 40px;
         }
 
         @media (max-width: 850px) {
@@ -441,7 +493,7 @@ function App() {
           padding: 24px;
           cursor: pointer;
           transition: var(--transition-smooth);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -449,7 +501,7 @@ function App() {
 
         .feature-card:hover {
           transform: translateY(-4px);
-          border-color: rgba(212, 175, 55, 0.2);
+          border-color: rgba(var(--accent-rgb), 0.2);
           box-shadow: var(--shadow-md), var(--shadow-gold);
         }
 
@@ -458,7 +510,7 @@ function App() {
           font-size: 0.7rem;
           font-weight: 700;
           padding: 2px 8px;
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           color: var(--text-secondary);
@@ -466,8 +518,8 @@ function App() {
 
         .feature-card:hover .feat-badge {
           color: var(--accent-primary);
-          border-color: rgba(212, 175, 55, 0.3);
-          background: rgba(212, 175, 55, 0.1);
+          border-color: rgba(var(--accent-rgb), 0.3);
+          background: rgba(var(--accent-rgb), 0.1);
         }
 
         .feature-card h3 {
@@ -495,7 +547,7 @@ function App() {
         /* イチオシ商品セクション */
         .featured-product-section {
           padding: 30px;
-          border: 1px solid rgba(212, 175, 55, 0.25);
+          border: 1px solid rgba(var(--accent-rgb), 0.25);
           box-shadow: var(--shadow-lg), var(--shadow-gold);
         }
 
@@ -532,14 +584,14 @@ function App() {
           position: absolute;
           bottom: 12px;
           left: 12px;
-          background: rgba(10, 15, 29, 0.85);
+          background: rgba(251, 246, 233, 0.94);
           backdrop-filter: blur(4px);
           color: var(--accent-primary);
           padding: 4px 12px;
           font-size: 0.75rem;
           font-weight: 700;
           border-radius: 12px;
-          border: 1px solid rgba(212, 175, 55, 0.3);
+          border: 1px solid rgba(var(--accent-rgb), 0.3);
         }
 
         .featured-info {
@@ -590,7 +642,7 @@ function App() {
           flex-direction: column;
           gap: 16px;
           margin-bottom: 30px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
         }
 
         .filter-group {
@@ -622,7 +674,7 @@ function App() {
         }
 
         .filter-tab {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(var(--ink-rgb), 0.032);
           border: 1px solid var(--border-color);
           color: var(--text-secondary);
           padding: 6px 16px;
@@ -636,11 +688,11 @@ function App() {
         .filter-tab:hover {
           color: var(--text-primary);
           border-color: var(--text-muted);
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
         }
 
         .filter-tab.active {
-          background: rgba(212, 175, 55, 0.12);
+          background: rgba(var(--accent-rgb), 0.12);
           border-color: var(--accent-primary);
           color: var(--accent-primary);
         }
@@ -675,7 +727,7 @@ function App() {
 
         /* フッター */
         .footer {
-          background: #070a14;
+          background: var(--bg-tertiary);
           border-top: 1px solid var(--border-color);
           padding: 40px 0 20px;
           margin-top: 60px;
@@ -692,9 +744,9 @@ function App() {
         }
 
         .footer-brand .brand-name {
-          font-family: 'Outfit', sans-serif;
+          font-family: var(--font-serif);
           font-size: 1.4rem;
-          font-weight: 800;
+          font-weight: 700;
           color: var(--text-primary);
         }
 
@@ -705,10 +757,14 @@ function App() {
         }
 
         .hero-pr-note {
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          margin-top: -8px;
-          margin-bottom: 24px;
+          font-size: 0.82rem;
+          color: var(--text-primary);
+          font-weight: 700;
+          border-left: 3px solid var(--accent-secondary);
+          padding-left: 8px;
+        }
+        .section-header .hero-pr-note {
+          display: inline-block;
         }
 
         .footer-links {
@@ -717,21 +773,23 @@ function App() {
         }
 
         .footer-links a {
-          color: var(--text-secondary);
+          color: var(--accent-primary);
+          text-decoration: underline;
+          text-underline-offset: 3px;
         }
 
         .footer-legal {
           display: flex;
           gap: 12px;
           padding: 16px;
-          background: rgba(255, 255, 255, 0.01);
-          border: 1px solid rgba(255, 255, 255, 0.03);
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-color);
           border-radius: 12px;
           text-align: left;
         }
 
         .legal-text {
-          font-size: 0.75rem;
+          font-size: 0.8rem;
           color: var(--text-secondary);
           line-height: 1.5;
         }
@@ -739,7 +797,7 @@ function App() {
         .footer-bottom {
           display: flex;
           justify-content: center;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(var(--ink-rgb), 0.08);
           padding-top: 20px;
           font-size: 0.75rem;
           color: var(--text-muted);

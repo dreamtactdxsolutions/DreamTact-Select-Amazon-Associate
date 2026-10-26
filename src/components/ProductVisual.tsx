@@ -29,7 +29,7 @@ export const ProductVisual: React.FC<{ category: ProductCategory; size?: 'card' 
           justify-content: center;
           gap: 8px;
           width: 100%;
-          background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.12), transparent 60%), var(--bg-tertiary);
+          background: radial-gradient(circle at 30% 20%, rgba(var(--accent-rgb), 0.12), transparent 60%), var(--bg-tertiary);
           color: var(--accent-primary);
         }
         .product-visual-card { height: 200px; }

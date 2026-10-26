@@ -134,7 +134,7 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(4, 6, 12, 0.7);
+          background: rgba(43, 32, 22, 0.55);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
           display: flex;
@@ -148,8 +148,8 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
           width: 100%;
           max-width: 500px;
           padding: 24px;
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), var(--shadow-gold);
-          border: 1px solid rgba(212, 175, 55, 0.2);
+          box-shadow: 0 20px 25px -5px rgba(var(--ink-rgb), 0.2), var(--shadow-gold);
+          border: 1px solid rgba(var(--accent-rgb), 0.2);
         }
 
         .modal-header {
@@ -177,7 +177,7 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
         }
 
         .close-btn:hover {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
           color: var(--text-primary);
         }
 
@@ -213,7 +213,7 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
 
         .text-input {
           width: 100%;
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(var(--ink-rgb), 0.08);
           border: 1px solid var(--border-color);
           border-radius: 8px;
           padding: 12px 40px 12px 14px;
@@ -226,7 +226,7 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
         .text-input:focus {
           outline: none;
           border-color: var(--accent-primary);
-          box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+          box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.15);
         }
 
         .reset-btn {
@@ -246,14 +246,14 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
 
         .reset-btn:hover {
           color: var(--text-secondary);
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
         }
 
         .info-box {
           display: flex;
           gap: 10px;
-          background: rgba(59, 130, 246, 0.08);
-          border: 1px solid rgba(59, 130, 246, 0.2);
+          background: rgba(var(--auburn-rgb), 0.08);
+          border: 1px solid rgba(var(--auburn-rgb), 0.2);
           padding: 12px;
           border-radius: 8px;
           font-size: 0.8rem;
@@ -268,7 +268,7 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
         }
 
         .preview-box {
-          background: rgba(0, 0, 0, 0.3);
+          background: rgba(var(--ink-rgb), 0.12);
           border: 1px solid var(--border-color);
           padding: 12px;
           border-radius: 8px;
@@ -305,7 +305,7 @@ export const AssociateConfig: React.FC<AssociateConfigProps> = ({
 
         .btn-save {
           background: var(--accent-primary);
-          color: #000;
+          color: #fff;
           font-weight: 700;
           padding: 10px 20px;
           border-radius: 30px;

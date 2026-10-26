@@ -137,7 +137,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({
           position: relative;
           width: 100%;
           overflow-x: auto;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(var(--ink-rgb), 0.08);
           box-shadow: var(--shadow-lg);
         }
 
@@ -145,11 +145,11 @@ export const CompareTable: React.FC<CompareTableProps> = ({
           display: none;
           text-align: center;
           padding: 6px;
-          background: rgba(212, 175, 55, 0.15);
+          background: rgba(var(--accent-rgb), 0.15);
           font-size: 0.7rem;
           font-weight: 600;
           color: var(--accent-primary);
-          border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+          border-bottom: 1px solid rgba(var(--accent-rgb), 0.2);
         }
 
         @media (max-width: 768px) {
@@ -170,7 +170,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({
         .compare-table td {
           padding: 16px;
           border-bottom: 1px solid var(--border-color);
-          border-right: 1px solid rgba(255, 255, 255, 0.05);
+          border-right: 1px solid rgba(var(--ink-rgb), 0.08);
           vertical-align: middle;
         }
 
@@ -181,7 +181,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({
         .sticky-col {
           position: sticky;
           left: 0;
-          background: #111827; /* 背景色で透過を防ぐ */
+          background: var(--bg-secondary); /* 背景色で透過を防ぐ */
           z-index: 10;
           font-weight: 700;
           color: var(--text-primary);
@@ -192,7 +192,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({
 
         .product-th {
           width: 250px;
-          background: rgba(255, 255, 255, 0.01);
+          background: rgba(var(--ink-rgb), 0.016);
         }
 
         .th-product-info {
@@ -215,10 +215,10 @@ export const CompareTable: React.FC<CompareTableProps> = ({
           font-size: 0.7rem;
           font-weight: 700;
           color: var(--accent-primary);
-          background: rgba(212, 175, 55, 0.1);
+          background: rgba(var(--accent-rgb), 0.1);
           padding: 2px 8px;
           border-radius: 12px;
-          border: 1px solid rgba(212, 175, 55, 0.2);
+          border: 1px solid rgba(var(--accent-rgb), 0.2);
         }
 
         .table-product-name {

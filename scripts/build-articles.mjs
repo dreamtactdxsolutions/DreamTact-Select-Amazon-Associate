@@ -35,9 +35,18 @@ const parseArticle = (file) => {
   const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!m) throw new Error(`${file}: 先頭に --- で囲んだ情報（title など）がありません`);
   const meta = {};
+  let listKey = '';
   for (const line of m[1].split('\n')) {
     const kv = line.match(/^([A-Za-z_]+):\s*(.*)$/);
-    if (kv) meta[kv[1]] = kv[2].trim().replace(/^["']|["']$/g, '');
+    if (kv) {
+      meta[kv[1]] = kv[2].trim().replace(/^["']|["']$/g, '');
+      // summary: の次の行から「  - 〜」と書くと、結論ボックスの箇条書きとして読む
+      listKey = kv[1] === 'summary' && !meta[kv[1]] ? 'summary' : '';
+      if (listKey) meta.summaryItems = [];
+      continue;
+    }
+    const item = line.match(/^\s+-\s+(.*)$/);
+    if (listKey && item) meta.summaryItems.push(item[1].trim().replace(/^["']|["']$/g, ''));
   }
   return { file, slug: meta.slug || file.replace(/\.md$/, ''), meta, body: m[2] };
 };
@@ -50,7 +59,12 @@ const findProblems = (a) => {
   }
   if (a.meta.published && !/^\d{4}-\d{2}-\d{2}$/.test(a.meta.published)) problems.push('published は YYYY-MM-DD 形式で書く');
   if (!/^[a-z0-9-]+$/.test(a.slug)) problems.push('slug は半角英小文字・数字・ハイフンだけにする');
-  const text = `${a.meta.title}\n${a.meta.description}\n${a.body.replace(/<!--[\s\S]*?-->/g, '')}`;
+  const summaryItems = a.meta.summaryItems || [];
+  if (a.meta.summary || summaryItems.length) {
+    if (a.meta.summary) problems.push('summary は「summary:」の次の行から「  - 〜」の箇条書きで書く（2〜4行）');
+    else if (summaryItems.length < 2 || summaryItems.length > 4) problems.push(`summary（結論ボックス）は2〜4行で書く（現在 ${summaryItems.length} 行）`);
+  }
+  const text = `${a.meta.title}\n${a.meta.description}\n${summaryItems.join('\n')}\n${a.body.replace(/<!--[\s\S]*?-->/g, '')}`;
   if (text.includes('要確認')) problems.push('「要確認」が残っている');
   for (const [, v] of text.matchAll(/\{\{ASIN:([^}]*)\}\}/g)) {
     if (!/^[A-Z0-9]{10}$/.test(v)) problems.push(`ASINが不正: ${v}`);
@@ -91,6 +105,17 @@ const renderBody = (body) => {
     .replace(/\{\{ASIN:([A-Z0-9]{10})\}\}/g, (_, asin) => affiliateUrl(asin));
   return marked.parse(withLinks);
 };
+
+// 結論ボックス（フロントマターに summary があるときだけ）。PR表記は別に必ず出る
+const summaryBox = (items) =>
+  items && items.length
+    ? `<aside class="summary-box" aria-label="この記事の結論">
+<p class="summary-title">この記事の結論</p>
+<ul>
+${items.map((i) => `<li>${marked.parseInline(i.replace(/\{\{ASIN:([A-Z0-9]{10})\}\}/g, (_, asin) => affiliateUrl(asin)))}</li>`).join('\n')}
+</ul>
+</aside>`
+    : '';
 
 // シェアボタン。各SNSの公式スクリプトは読み込まず、シェア用URLへのリンクだけにする
 const shareBar = (title, url, position) => {
@@ -162,13 +187,13 @@ ${ogImage ? `<meta property="og:image" content="${ogImage}" />\n` : ''}<meta nam
 <link rel="icon" type="image/svg+xml" href="${rel}favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
 ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n` : ''}<style>${CSS}</style>
 ${gaSnippet()}
 </head>
 <body>
 <header class="site-header"><div class="wrap">
-  <a class="brand" href="${rel}">DreamTact <span>Select</span></a>
+  <a class="brand" href="${rel}">${BRAND_ICON}DreamTact <span>Select</span></a>
   <nav><a href="${rel}">ホーム</a><a href="${rel}articles/">記事一覧</a></nav>
 </div></header>
 ${main}
@@ -182,6 +207,9 @@ ${main}
 </html>
 `;
 
+// 切妻屋根の小さな線画（ロゴ用）
+const BRAND_ICON = '<svg class="brand-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 16 16 5l13 11" stroke="#2f5d3a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14v12h18V14" stroke="#2f5d3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 26v-6a3 3 0 0 1 6 0v6" stroke="#9c3d1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 const formatDate = (d) => {
   const [y, m, day] = d.split('-').map(Number);
   return `${y}年${m}月${day}日`;
@@ -191,58 +219,78 @@ const formatDate = (d) => {
 const FOOTER_PAGE_LINKS = [['about', '運営者情報'], ['privacy', 'プライバシーポリシー']];
 
 const CSS = `
-:root{--bg:#0a0f1d;--bg2:#111827;--bg3:#1f2937;--text:#f3f4f6;--text2:#9ca3af;--gold:#d4af37;--blue:#60a5fa;--border:#374151}
+:root{--bg:#fbf6e9;--bg2:#fffdf7;--bg3:#f1e9d2;--text:#3b2a1e;--text2:#5a4636;--muted:#735e4b;--green:#2f5d3a;--green-d:#234a2d;--meadow:#e6eed2;--auburn:#9c3d1a;--auburn-d:#823014;--border:#dccfae;--serif:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho','Noto Serif CJK JP',serif;--sans:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,-apple-system,BlinkMacSystemFont,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.9;font-size:16px}
-a{color:var(--blue)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.9;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--green);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid rgba(156,61,26,.55);outline-offset:2px}
 .wrap{max-width:760px;margin:0 auto;padding:0 16px}
 .site-header{border-bottom:1px solid var(--border);background:var(--bg2)}
-.site-header .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;gap:12px}
-.brand{font-family:Outfit,sans-serif;font-weight:700;font-size:20px;color:var(--text);text-decoration:none;white-space:nowrap}
-.brand span{color:var(--gold)}
-.site-header nav{display:flex;gap:16px;font-size:14px}
-.site-header nav a{color:var(--text2);text-decoration:none}
-.site-header nav a:hover{color:var(--gold)}
+.site-header .wrap{display:flex;justify-content:space-between;align-items:center;min-height:60px;gap:12px}
+.brand{display:inline-flex;align-items:center;gap:8px;font-family:var(--serif);font-weight:700;font-size:20px;color:var(--green);text-decoration:none;white-space:nowrap}
+.brand span{color:var(--text2);font-weight:500}
+.brand-icon{flex-shrink:0}
+.site-header nav{display:flex;gap:6px;font-size:14px}
+.site-header nav a{color:var(--text2);text-decoration:none;padding:8px 12px;border-radius:999px;min-height:40px;display:inline-flex;align-items:center}
+.site-header nav a:hover{color:var(--green);background:var(--meadow)}
 main{padding:32px 0 64px}
-.pr-note{border:1px solid var(--gold);color:var(--gold);border-radius:8px;padding:8px 12px;font-size:14px;margin-bottom:20px;font-weight:700}
+.pr-note{background:#fff6e8;border:1px solid var(--auburn);border-left-width:5px;color:#7a2f12;border-radius:10px;padding:8px 12px;font-size:14px;margin-bottom:20px;font-weight:700;line-height:1.7}
 .draft-note{background:#7f1d1d;color:#fff;border-radius:8px;padding:8px 12px;font-size:14px;margin-bottom:16px}
-h1{font-size:28px;line-height:1.5;margin-bottom:12px}
-.dates{color:var(--text2);font-size:14px;margin-bottom:24px}
-.eyecatch{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:28px;display:block}
-.article img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block;margin:16px 0}
-.article h2{font-size:22px;margin:48px 0 16px;padding:4px 0 4px 12px;border-left:4px solid var(--gold);line-height:1.5}
-.article h3{font-size:18px;margin:32px 0 12px;line-height:1.5}
+h1{font-family:var(--serif);font-size:28px;line-height:1.5;margin-bottom:12px;color:var(--text)}
+.dates{color:var(--muted);font-size:14px;margin-bottom:20px}
+.summary-box{background:var(--meadow);border:1px solid #b9cc8e;border-left:6px solid var(--green);border-radius:14px;padding:16px 20px 14px;margin:0 0 24px;box-shadow:0 3px 10px rgba(59,42,30,.08)}
+.summary-title{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--green-d);margin-bottom:6px;line-height:1.6}
+.summary-box ul{margin:0 0 0 1.3em;padding:0}
+.summary-box li{margin:4px 0;line-height:1.8;font-weight:500}
+.summary-box li::marker{color:var(--green)}
+.eyecatch{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);box-shadow:0 6px 16px rgba(59,42,30,.12);margin-bottom:28px;display:block}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:16px 0}
+.article h2{font-family:var(--serif);font-size:22px;margin:52px 0 16px;padding:6px 0 8px 14px;border-left:6px solid var(--green);border-bottom:1px dashed var(--border);line-height:1.5}
+.article h3{font-family:var(--serif);font-size:18px;margin:32px 0 12px;line-height:1.5;color:var(--green-d)}
 .article p{margin:0 0 18px}
 .article ul,.article ol{margin:0 0 18px 1.4em}
 .article li{margin:4px 0}
-.article blockquote{border-left:3px solid var(--border);padding:4px 16px;color:var(--text2);margin:0 0 18px}
-.article hr{border:none;border-top:1px solid var(--border);margin:36px 0}
-.article strong{color:#fff}
+.article blockquote{border-left:4px solid #b9cc8e;background:var(--bg2);border-radius:0 10px 10px 0;padding:8px 16px;color:var(--text2);margin:0 0 18px}
+.article hr{border:none;border-top:1px dashed var(--border);margin:36px 0}
+.article strong{color:#2a1c12}
 .article code{background:var(--bg3);padding:1px 6px;border-radius:4px;font-size:.9em}
-.table-wrap{overflow-x:auto;margin:0 0 24px;-webkit-overflow-scrolling:touch}
-.article table{border-collapse:collapse;min-width:100%;font-size:14px;line-height:1.6}
-.article th,.article td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
-.article th{background:var(--bg3);white-space:nowrap}
-.article a[href*="amazon.co.jp"]{display:inline-block;background:linear-gradient(135deg,#ffb84d,#ff9900);color:#111;font-weight:700;text-decoration:none;padding:10px 20px;border-radius:999px;margin:4px 0}
+.table-wrap{overflow-x:auto;margin:0 0 24px;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:12px;background:linear-gradient(to right,var(--bg2) 30%,rgba(255,253,247,0)) left center/40px 100% no-repeat local,linear-gradient(to left,var(--bg2) 30%,rgba(255,253,247,0)) right center/40px 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(59,42,30,.22),rgba(59,42,30,0)) left center/12px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(59,42,30,.22),rgba(59,42,30,0)) right center/12px 100% no-repeat scroll,var(--bg2)}
+.article table{border-collapse:separate;border-spacing:0;min-width:100%;font-size:14px;line-height:1.7;background:transparent}
+.article th,.article td{border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top;min-width:9.5em;word-break:normal;overflow-wrap:anywhere}
+.article tr>*:last-child{border-right:none}
+.article tbody tr:last-child>*{border-bottom:none}
+.article th{background:var(--bg3);font-weight:700;color:var(--text);white-space:nowrap}
+.article thead th:first-child,.article tbody td:first-child{position:sticky;left:0;z-index:1;min-width:8.5em;max-width:11em;white-space:normal;overflow-wrap:anywhere;word-break:keep-all;font-weight:700;background:#f7f0dc;border-right:2px solid #cdbf98}
+.article thead th:first-child{background:var(--bg3);z-index:2}
+.article tbody tr:nth-child(even) td:not(:first-child){background:rgba(241,233,210,.35)}
+.article table{min-width:max(100%,44em)}
+.article a{font-weight:500}
+.article a[href*="amazon.co.jp"]{display:inline-flex;align-items:center;justify-content:center;min-height:46px;background:var(--auburn);color:#fff;font-weight:700;text-decoration:none;padding:10px 22px;border-radius:999px;margin:4px 0;box-shadow:0 3px 10px rgba(156,61,26,.3);word-break:keep-all}
+.article a[href*="amazon.co.jp"]:hover{background:var(--auburn-d)}
+.article td a[href*="amazon.co.jp"],.article th a[href*="amazon.co.jp"]{min-height:40px;padding:6px 14px;font-size:13px;white-space:nowrap}
 .share{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 24px}
-.share-label{color:var(--text2);font-size:13px;margin-right:4px}
-.share-btn{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
-.share-btn:hover{border-color:var(--gold)}
-.share-x{background:#000;border-color:#333}
-.share-line{background:#06c755;border-color:#06c755;color:#fff}
-.share-hatena{background:#00a4de;border-color:#00a4de;color:#fff}
+.share-label{color:var(--muted);font-size:13px;margin-right:4px}
+.share-btn{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
+.share-btn:hover{border-color:var(--green)}
+.share-x{background:#000;border-color:#000;color:#fff}
+.share-line{background:#06c755;border-color:#06c755;color:#04290f}
+.share-hatena{background:#00a4de;border-color:#00a4de;color:#04202c}
 .share-lead{margin:40px 0 10px;color:var(--text2);font-size:14px}
 .list{list-style:none}
 .article ul.list{margin-left:0}
-.list li{border:1px solid var(--border);border-radius:12px;margin-bottom:16px;background:var(--bg2)}
-.list a{display:block;padding:16px;color:var(--text);text-decoration:none}
-.list a:hover{border-color:var(--gold)}
-.list .t{font-weight:700;font-size:17px;line-height:1.5;margin-bottom:6px}
-.list .d{color:var(--text2);font-size:14px}
-.site-footer{border-top:1px solid var(--border);color:var(--text2);font-size:13px;padding:24px 0 40px;line-height:1.8}
+.list li{border:1px solid var(--border);border-radius:16px;margin-bottom:18px;background:var(--bg2);box-shadow:0 2px 6px rgba(59,42,30,.06);overflow:hidden;transition:box-shadow .2s,border-color .2s}
+.list li:hover{border-color:var(--green);box-shadow:0 8px 20px rgba(59,42,30,.14)}
+.list a{display:block;color:var(--text);text-decoration:none}
+.list .thumb{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;border:none;border-radius:0;margin:0;background:var(--bg3)}
+.list .li-body{padding:14px 18px 16px}
+.list .t{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.6;margin-bottom:6px}
+.list .d{color:var(--muted);font-size:14px;line-height:1.7}
+.list .date{color:var(--muted);font-size:13px;margin-bottom:2px}
+.site-footer{border-top:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;padding:24px 0 40px;line-height:1.8}
 .site-footer p{margin-bottom:6px}
-.site-footer a{color:var(--text2)}
-@media (max-width:600px){h1{font-size:23px}.article h2{font-size:20px}.site-header nav{gap:10px}}
+.site-footer a{color:var(--green);font-weight:700}
+@media (min-width:700px){.list.has-thumb a{display:flex}.list.has-thumb .thumb{width:300px;flex-shrink:0;align-self:center;aspect-ratio:1200/630;height:auto}.list.has-thumb .li-body{padding:16px 20px}}
+@media (max-width:600px){h1{font-size:23px}.article h2{font-size:20px}.site-header .wrap{flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.site-header nav{gap:2px}.article table{font-size:13px;min-width:max(100%,40em)}.article th,.article td{padding:9px 10px;min-width:8.5em}.article thead th:first-child,.article tbody td:first-child{min-width:7.8em;max-width:8.5em}}
 `;
 
 // content/pages/*.md を /<slug>/ に出す。記事と同じ公開チェック（要確認など）を通す
@@ -336,6 +384,7 @@ const main = () => {
 ${a.isDraft ? '<p class="draft-note">これは下書きのプレビューです（検索エンジンには表示されません）</p>\n' : ''}<p class="pr-note">${PR_DISCLOSURE}</p>
 ${a.meta.hands_on === 'owner' ? '<p class="pr-note">この記事は、運営者が自費で購入して使った体験をもとに書いています。</p>\n' : ''}<h1>${escapeHtml(a.meta.title)}</h1>
 <p class="dates">${dates}</p>
+${summaryBox(a.meta.summaryItems)}
 ${shareBar(a.meta.title, canonical, 'top')}
 ${eyecatch ? `<img class="eyecatch" src="${rel}${escapeHtml(eyecatch)}" alt="${escapeHtml(a.meta.title)}" width="1200" height="630" />\n` : ''}<article class="article">
 ${renderBody(a.body)}
@@ -352,8 +401,8 @@ ${SHARE_SCRIPT}`,
 
   // 記事一覧
   const listItems = pages.length
-    ? pages.map((a) => `<li><a href="${a.slug}/"><p class="t">${a.isDraft ? '【下書き】' : ''}${escapeHtml(a.meta.title)}</p><p class="d">${a.meta.published ? formatDate(a.meta.published) : ''}　${escapeHtml(a.meta.description || '')}</p></a></li>`).join('\n')
-    : '<li><a href="../"><p class="t">記事を準備中です</p><p class="d">公開までしばらくお待ちください。</p></a></li>';
+    ? pages.map((a) => `<li><a href="${a.slug}/">${a.meta.eyecatch ? `<img class="thumb" src="../${escapeHtml(a.meta.eyecatch.replace(/^\//, ''))}" alt="" width="1200" height="630" loading="lazy" />` : ''}<div class="li-body"><p class="date">${a.meta.published ? formatDate(a.meta.published) : ''}</p><p class="t">${a.isDraft ? '【下書き】' : ''}${escapeHtml(a.meta.title)}</p><p class="d">${escapeHtml(a.meta.description || '')}</p></div></a></li>`).join('\n')
+    : '<li><a href="../"><div class="li-body"><p class="t">記事を準備中です</p><p class="d">公開までしばらくお待ちください。</p></div></a></li>';
   mkdirSync(join(distDir, 'articles'), { recursive: true });
   writeFileSync(join(distDir, 'articles', 'index.html'), pageShell({
     rel: '../',
@@ -361,7 +410,7 @@ ${SHARE_SCRIPT}`,
     description: 'ガジェット・家電・キッチン用品・美容家電の選び方とスペック比較の記事一覧です。',
     canonical: `${SITE_URL}articles/`,
     noindex: pages.length === 0 || pages.every((a) => a.isDraft),
-    main: `<main><div class="wrap"><p class="pr-note">${PR_DISCLOSURE}</p><h1>記事一覧</h1><ul class="list">\n${listItems}\n</ul></div></main>`,
+    main: `<main><div class="wrap"><p class="pr-note">${PR_DISCLOSURE}</p><h1>記事一覧</h1><ul class="list has-thumb">\n${listItems}\n</ul></div></main>`,
   }));
 
   // トップページの「新着記事」用（公開記事だけ）
@@ -399,7 +448,7 @@ ${SHARE_SCRIPT}`,
 <li><a href="${SITE_URL}">トップページへ</a></li>
 <li><a href="${SITE_URL}articles/">記事一覧へ</a></li>
 </ul>
-${latest.length ? `<h2>新着記事</h2>\n<ul class="list">\n${latest.map((a) => `<li><a href="${SITE_URL}articles/${a.slug}/"><p class="t">${escapeHtml(a.meta.title)}</p><p class="d">${a.meta.published ? formatDate(a.meta.published) : ''}</p></a></li>`).join('\n')}\n</ul>` : ''}
+${latest.length ? `<h2>新着記事</h2>\n<ul class="list">\n${latest.map((a) => `<li><a href="${SITE_URL}articles/${a.slug}/"><div class="li-body"><p class="t">${escapeHtml(a.meta.title)}</p><p class="d">${a.meta.published ? formatDate(a.meta.published) : ''}</p></div></a></li>`).join('\n')}\n</ul>` : ''}
 </article>
 </div></main>`,
   }));

@@ -154,7 +154,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(4, 6, 12, 0.85);
+          background: rgba(43, 32, 22, 0.55);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           display: flex;
@@ -171,8 +171,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           max-height: 90vh;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), var(--shadow-gold);
-          border: 1px solid rgba(212, 175, 55, 0.25);
+          box-shadow: 0 25px 50px -12px rgba(var(--ink-rgb), 0.24), var(--shadow-gold);
+          border: 1px solid rgba(var(--accent-rgb), 0.25);
           padding: 24px;
         }
 
@@ -205,7 +205,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         }
 
         .close-btn:hover {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--ink-rgb), 0.08);
           color: var(--text-primary);
         }
 
@@ -234,7 +234,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         .detail-img-wrapper {
           width: 100%;
           height: 280px;
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(var(--ink-rgb), 0.08);
           border-radius: 12px;
           overflow: hidden;
           border: 1px solid var(--border-color);
@@ -273,7 +273,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         }
 
         .detail-price-box {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(var(--ink-rgb), 0.032);
           border: 1px solid var(--border-color);
           padding: 14px;
           border-radius: 8px;
@@ -342,7 +342,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         .pros-box, .cons-box {
           padding: 20px;
           border-radius: 12px;
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(var(--ink-rgb), 0.06);
           border: 1px solid var(--border-color);
         }
 
@@ -423,7 +423,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         }
 
         .specs-key {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(var(--ink-rgb), 0.032);
           padding: 10px 14px;
           color: var(--text-secondary);
           font-weight: 600;
